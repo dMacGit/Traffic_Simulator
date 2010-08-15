@@ -9,16 +9,15 @@ using System.Windows.Forms;
 
 namespace Traffic_Simulator
 {
-    public partial class Form1 : Form
+    public partial class MainGuiForm : Form
     {
-        public Form1()
+        public MainGuiForm()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainGuiForm_Load(object sender, EventArgs e)
         {
-
         }
     }
 }
