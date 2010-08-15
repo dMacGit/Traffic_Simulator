@@ -1,11 +1,16 @@
-﻿namespace Traffic_Simulator
+﻿using System;
+using System.Drawing;
+using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Traffic_Simulator
 {
-    partial class Form1
+    partial class MainGuiForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -30,6 +35,12 @@
         {
             this.TrafficSimulatorMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.designToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simulationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.designToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.simulationToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.designToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.simulationToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,12 +56,6 @@
             this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.designToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.simulationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.designToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.simulationToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.TrafficSimulatorMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,6 +82,62 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.designToolStripMenuItem,
+            this.simulationToolStripMenuItem});
+            this.newToolStripMenuItem.Image = global::Traffic_Simulator.Properties.Resources.File_Icon_30x30;
+            this.newToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
+            this.newToolStripMenuItem.Text = "New";
+            // 
+            // designToolStripMenuItem
+            // 
+            this.designToolStripMenuItem.Image = global::Traffic_Simulator.Properties.Resources.design_Icon;
+            this.designToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.designToolStripMenuItem.Name = "designToolStripMenuItem";
+            this.designToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
+            this.designToolStripMenuItem.Text = "Design";
+            this.designToolStripMenuItem.Click += new System.EventHandler(this.MainGuiForm_Load);
+            // 
+            // simulationToolStripMenuItem
+            // 
+            this.simulationToolStripMenuItem.Image = global::Traffic_Simulator.Properties.Resources.simulation_Icon;
+            this.simulationToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.simulationToolStripMenuItem.Name = "simulationToolStripMenuItem";
+            this.simulationToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
+            this.simulationToolStripMenuItem.Text = "Simulation";
+            this.simulationToolStripMenuItem.Click += new System.EventHandler(this.MainGuiForm_Load);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.designToolStripMenuItem1,
+            this.simulationToolStripMenuItem1});
+            this.openToolStripMenuItem.Image = global::Traffic_Simulator.Properties.Resources.open_Icon;
+            this.openToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
+            this.openToolStripMenuItem.Text = "Open";
+            // 
+            // designToolStripMenuItem1
+            // 
+            this.designToolStripMenuItem1.Image = global::Traffic_Simulator.Properties.Resources.design_Icon;
+            this.designToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.designToolStripMenuItem1.Name = "designToolStripMenuItem1";
+            this.designToolStripMenuItem1.Size = new System.Drawing.Size(145, 36);
+            this.designToolStripMenuItem1.Text = "Design";
+            // 
+            // simulationToolStripMenuItem1
+            // 
+            this.simulationToolStripMenuItem1.Image = global::Traffic_Simulator.Properties.Resources.simulation_Icon;
+            this.simulationToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.simulationToolStripMenuItem1.Name = "simulationToolStripMenuItem1";
+            this.simulationToolStripMenuItem1.Size = new System.Drawing.Size(145, 36);
+            this.simulationToolStripMenuItem1.Text = "Simulation";
             // 
             // saveToolStripMenuItem
             // 
@@ -157,88 +218,34 @@
             this.restartToolStripMenuItem,
             this.startToolStripMenuItem});
             this.simulationToolStripMenuItem3.Name = "simulationToolStripMenuItem3";
-            this.simulationToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.simulationToolStripMenuItem3.Size = new System.Drawing.Size(131, 22);
             this.simulationToolStripMenuItem3.Text = "Simulation";
             // 
             // pauseToolStripMenuItem
             // 
             this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
-            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.pauseToolStripMenuItem.Text = "Pause";
             // 
             // stopToolStripMenuItem
             // 
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.stopToolStripMenuItem.Text = "Stop";
             // 
             // restartToolStripMenuItem
             // 
             this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
-            this.restartToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.restartToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.restartToolStripMenuItem.Text = "Restart";
             // 
             // startToolStripMenuItem
             // 
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.startToolStripMenuItem.Text = "Start";
             // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.designToolStripMenuItem,
-            this.simulationToolStripMenuItem});
-            this.newToolStripMenuItem.Image = global::Traffic_Simulator.Properties.Resources.File_Icon_30x30;
-            this.newToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
-            this.newToolStripMenuItem.Text = "New";
-            // 
-            // designToolStripMenuItem
-            // 
-            this.designToolStripMenuItem.Image = global::Traffic_Simulator.Properties.Resources.design_Icon;
-            this.designToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.designToolStripMenuItem.Name = "designToolStripMenuItem";
-            this.designToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
-            this.designToolStripMenuItem.Text = "Design";
-            // 
-            // simulationToolStripMenuItem
-            // 
-            this.simulationToolStripMenuItem.Image = global::Traffic_Simulator.Properties.Resources.simulation_Icon;
-            this.simulationToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.simulationToolStripMenuItem.Name = "simulationToolStripMenuItem";
-            this.simulationToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
-            this.simulationToolStripMenuItem.Text = "Simulation";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.designToolStripMenuItem1,
-            this.simulationToolStripMenuItem1});
-            this.openToolStripMenuItem.Image = global::Traffic_Simulator.Properties.Resources.open_Icon;
-            this.openToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
-            this.openToolStripMenuItem.Text = "Open";
-            // 
-            // designToolStripMenuItem1
-            // 
-            this.designToolStripMenuItem1.Image = global::Traffic_Simulator.Properties.Resources.design_Icon;
-            this.designToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.designToolStripMenuItem1.Name = "designToolStripMenuItem1";
-            this.designToolStripMenuItem1.Size = new System.Drawing.Size(166, 36);
-            this.designToolStripMenuItem1.Text = "Design";
-            // 
-            // simulationToolStripMenuItem1
-            // 
-            this.simulationToolStripMenuItem1.Image = global::Traffic_Simulator.Properties.Resources.simulation_Icon;
-            this.simulationToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.simulationToolStripMenuItem1.Name = "simulationToolStripMenuItem1";
-            this.simulationToolStripMenuItem1.Size = new System.Drawing.Size(166, 36);
-            this.simulationToolStripMenuItem1.Text = "Simulation";
-            // 
-            // Form1
+            // MainGuiForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -246,9 +253,9 @@
             this.ClientSize = new System.Drawing.Size(1148, 264);
             this.Controls.Add(this.TrafficSimulatorMenu);
             this.MainMenuStrip = this.TrafficSimulatorMenu;
-            this.Name = "Form1";
+            this.Name = "MainGuiForm";
             this.Text = "Traffic Simulator";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainGuiForm_Load);
             this.TrafficSimulatorMenu.ResumeLayout(false);
             this.TrafficSimulatorMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -258,30 +265,29 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip TrafficSimulatorMenu;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem designToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem simulationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem designToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem simulationToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem designToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem simulationToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem iconsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem simulationToolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem designToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem controlsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem simulationToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem layToolStripMenuItem;
-
+        private MenuStrip TrafficSimulatorMenu;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem optionsToolStripMenuItem;
+        private ToolStripMenuItem newToolStripMenuItem;
+        private ToolStripMenuItem designToolStripMenuItem;
+        private ToolStripMenuItem simulationToolStripMenuItem;
+        private ToolStripMenuItem openToolStripMenuItem;
+        private ToolStripMenuItem designToolStripMenuItem1;
+        private ToolStripMenuItem simulationToolStripMenuItem1;
+        private ToolStripMenuItem saveToolStripMenuItem;
+        private ToolStripMenuItem designToolStripMenuItem2;
+        private ToolStripMenuItem simulationToolStripMenuItem2;
+        private ToolStripMenuItem iconsToolStripMenuItem;
+        private ToolStripMenuItem simulationToolStripMenuItem4;
+        private ToolStripMenuItem designToolStripMenuItem3;
+        private ToolStripMenuItem controlsToolStripMenuItem;
+        private ToolStripMenuItem simulationToolStripMenuItem3;
+        private ToolStripMenuItem pauseToolStripMenuItem;
+        private ToolStripMenuItem stopToolStripMenuItem;
+        private ToolStripMenuItem restartToolStripMenuItem;
+        private ToolStripMenuItem startToolStripMenuItem;
+        private ToolStripMenuItem layToolStripMenuItem;
     }
 }
 
