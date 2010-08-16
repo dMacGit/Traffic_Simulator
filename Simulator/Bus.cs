@@ -2,11 +2,11 @@ using System;
 namespace Traffic_Simulator
 {
 	public class Bus : Vehicle  {
-		private int length;
-		private int averageSpeed;
-		private int maximumSpeed;
-		private int drivingStyle;
 
+        private const int MAX_SPEED = 80;
+        private const int MIN_SPEED = 60;
+
+ 
 	}
 
 }
