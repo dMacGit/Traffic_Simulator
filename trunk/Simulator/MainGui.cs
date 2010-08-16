@@ -8,7 +8,12 @@ namespace Traffic_Simulator
 {
 	public class MainGui 
     {
-        private Graphics displayPanel;
+        private Form displayPanel;
+        private DesignGuiForm designGuiForm;
+        private DesignGui designGui;
+
+        //private SimulationGuiForm simulationGuiForm;
+
 
         /// <summary>
         /// The main entry point for the application.
@@ -20,8 +25,6 @@ namespace Traffic_Simulator
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainGuiForm());
         }
-        
-
         public Graphics GetDisplay()
         {
 			throw new Exception("Not implemented");

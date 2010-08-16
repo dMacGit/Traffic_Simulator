@@ -56,6 +56,12 @@
     <Compile Include="Curve.cs" />
     <Compile Include="Design.cs" />
     <Compile Include="DesignGui.cs" />
+    <Compile Include="DesignGuiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DesignGuiForm.Designer.cs">
+      <DependentUpon>DesignGuiForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Direction.cs" />
     <Compile Include="EntranceExit.cs" />
     <Compile Include="MainGuiForm.cs">
@@ -75,6 +81,10 @@
     <Compile Include="Private_Vehicles.cs" />
     <Compile Include="Properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DesignGuiForm.resx">
+      <DependentUpon>DesignGuiForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainGuiForm.resx">
       <DependentUpon>MainGuiForm.cs</DependentUpon>
       <SubType>Designer</SubType>
