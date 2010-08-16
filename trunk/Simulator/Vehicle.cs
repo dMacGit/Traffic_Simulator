@@ -5,8 +5,7 @@ namespace Traffic_Simulator {
 	public class Vehicle {
 		private int length;
 		private String vehicleType;
-		private int averageSpeed;
-		private int maximumSpeed;
+		private int speed;
 		private int drivingStyle;
 		private int vehicleID;
 		private bool isIndicating;
@@ -15,52 +14,64 @@ namespace Traffic_Simulator {
         private Point destination;
 		private int indicationTime;
 		private int laneNumber;
+        private Image vehiclePicture;
 
+        public int GetSpeed()
+        {
+            return speed;
+        }
+        public void SetSpeed(int speed)
+        {
+            this.speed = speed;
+        }
+        public void SetVehiclePicture(String filename)
+        {
+            this.vehiclePicture = Image.FromFile(filename);
+        }
 		public void SetVehicleID(int vehicleID) {
-			throw new System.Exception("Not implemented");
+            this.vehicleID = vehicleID;
 		}
 		public int GetVehicleID() {
-			throw new System.Exception("Not implemented");
+            return vehicleID;
 		}
-        public void SetIndicating(bool isIndicating)
-        {
-			throw new System.Exception("Not implemented");
+        public void SetIndicating(bool isIndicating){
+            this.isIndicating = isIndicating;
 		}
 		public void SetRightIndicating(bool rightIndicating) {
-			throw new System.Exception("Not implemented");
+            this.rightIndicating = rightIndicating;			
 		}
 		public bool GetIsIndicating() {
-			throw new System.Exception("Not implemented");
+            return isIndicating;
 		}
 		public bool GetRightIndicating() {
-			throw new System.Exception("Not implemented");
+            return rightIndicating;
 		}
 		public Point GetOrigin() {
-			throw new System.Exception("Not implemented");
+            return origin;
 		}
 		public Point GetDestination() {
-			throw new System.Exception("Not implemented");
+            return destination;
 		}
 		public void SetOrigin(Point origin) {
-			throw new System.Exception("Not implemented");
+            this.origin = origin;
 		}
 		public void SetDestination(Point destination) {
-			throw new System.Exception("Not implemented");
+            this.destination = destination;
 		}
 		public void SetIndicatingTime(int time) {
-			throw new System.Exception("Not implemented");
+            this.indicationTime = time;
 		}
 		public int GetIndicatingTime() {
-			throw new System.Exception("Not implemented");
+            return indicationTime;
 		}
 		public void CalculateNewPosition(Point newPosition, int currentSpeed) {
 			throw new System.Exception("Not implemented");
 		}
 		public void SetLaneNumber(int laneNumber) {
-			throw new System.Exception("Not implemented");
+            this.laneNumber = laneNumber;
 		}
 		public int GetLaneNumber() {
-			throw new System.Exception("Not implemented");
+            return laneNumber;
 		}
         public void Draw(System.Drawing.Graphics c, Graphics g)
         {
