@@ -56,9 +56,9 @@ namespace Traffic_Simulator
             this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            //this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            //this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            //this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.designToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -68,19 +68,19 @@ namespace Traffic_Simulator
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            //this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            //this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.TrafficSimulatorMenu.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            //this.splitContainer1.Panel2.SuspendLayout();
+            //this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            //this.tableLayoutPanel1.SuspendLayout();
+            //this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // TrafficSimulatorMenu
@@ -115,7 +115,7 @@ namespace Traffic_Simulator
             this.newToolStripMenuItem.Image = global::Traffic_Simulator.Properties.Resources.File_Icon_30x30;
             this.newToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(117, 36);
             this.newToolStripMenuItem.Text = "New";
             // 
             // designToolStripMenuItem
@@ -123,7 +123,7 @@ namespace Traffic_Simulator
             this.designToolStripMenuItem.Image = global::Traffic_Simulator.Properties.Resources.design_Icon;
             this.designToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.designToolStripMenuItem.Name = "designToolStripMenuItem";
-            this.designToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
+            this.designToolStripMenuItem.Size = new System.Drawing.Size(145, 36);
             this.designToolStripMenuItem.Text = "Design";
             this.designToolStripMenuItem.Click += new System.EventHandler(this.MainGuiForm_Load);
             // 
@@ -132,7 +132,7 @@ namespace Traffic_Simulator
             this.simulationToolStripMenuItem.Image = global::Traffic_Simulator.Properties.Resources.simulation_Icon;
             this.simulationToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.simulationToolStripMenuItem.Name = "simulationToolStripMenuItem";
-            this.simulationToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
+            this.simulationToolStripMenuItem.Size = new System.Drawing.Size(145, 36);
             this.simulationToolStripMenuItem.Text = "Simulation";
             this.simulationToolStripMenuItem.Click += new System.EventHandler(this.MainGuiForm_Load);
             // 
@@ -144,7 +144,7 @@ namespace Traffic_Simulator
             this.openToolStripMenuItem.Image = global::Traffic_Simulator.Properties.Resources.open_Icon;
             this.openToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(117, 36);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // designToolStripMenuItem1
@@ -169,7 +169,7 @@ namespace Traffic_Simulator
             this.designToolStripMenuItem2,
             this.simulationToolStripMenuItem2});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(166, 36);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(117, 36);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // designToolStripMenuItem2
@@ -196,13 +196,13 @@ namespace Traffic_Simulator
             // iconsToolStripMenuItem
             // 
             this.iconsToolStripMenuItem.Name = "iconsToolStripMenuItem";
-            this.iconsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.iconsToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.iconsToolStripMenuItem.Text = "Icons";
             // 
             // layToolStripMenuItem
             // 
             this.layToolStripMenuItem.Name = "layToolStripMenuItem";
-            this.layToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.layToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.layToolStripMenuItem.Text = "Layout";
             // 
             // optionsToolStripMenuItem
@@ -217,8 +217,14 @@ namespace Traffic_Simulator
             // simulationToolStripMenuItem4
             // 
             this.simulationToolStripMenuItem4.Name = "simulationToolStripMenuItem4";
-            this.simulationToolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
+            this.simulationToolStripMenuItem4.Size = new System.Drawing.Size(131, 22);
             this.simulationToolStripMenuItem4.Text = "Simulation";
+            // 
+            // designToolStripMenuItem3
+            // 
+            this.designToolStripMenuItem3.Name = "designToolStripMenuItem3";
+            this.designToolStripMenuItem3.Size = new System.Drawing.Size(131, 22);
+            this.designToolStripMenuItem3.Text = "Design";
             // 
             // controlsToolStripMenuItem
             // 
@@ -262,6 +268,7 @@ namespace Traffic_Simulator
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
             this.startToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.startToolStripMenuItem.Text = "Start";
+            /*
             // 
             // splitContainer1
             // 
@@ -278,6 +285,7 @@ namespace Traffic_Simulator
             this.splitContainer1.Size = new System.Drawing.Size(1108, 498);
             this.splitContainer1.SplitterDistance = 770;
             this.splitContainer1.TabIndex = 1;
+            
             // 
             // contextMenuStrip1
             // 
@@ -288,6 +296,7 @@ namespace Traffic_Simulator
             // 
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
+             * */
             // 
             // designToolStripMenuItem3
             // 
@@ -295,6 +304,7 @@ namespace Traffic_Simulator
             this.designToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
             this.designToolStripMenuItem3.Text = "Design";
             this.designToolStripMenuItem3.Click += new System.EventHandler(this.designToolStripMenuItem3_Click);
+            /*
             // 
             // button1
             // 
@@ -471,29 +481,31 @@ namespace Traffic_Simulator
             this.button10.TabIndex = 3;
             this.button10.Text = "Reset";
             this.button10.UseVisualStyleBackColor = true;
+             * */
             // 
             // MainGuiForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1108, 522);
-            this.Controls.Add(this.splitContainer1);
+            //this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.TrafficSimulatorMenu);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.TrafficSimulatorMenu;
             this.Name = "MainGuiForm";
             this.Text = "Traffic Simulator";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainGuiForm_Load);
             this.TrafficSimulatorMenu.ResumeLayout(false);
             this.TrafficSimulatorMenu.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.ResumeLayout(false);
+            //this.splitContainer1.Panel2.ResumeLayout(false);
+            //this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
+            //this.tableLayoutPanel1.ResumeLayout(false);
+            //this.tableLayoutPanel1.PerformLayout();
+            //this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -523,9 +535,9 @@ namespace Traffic_Simulator
         private ToolStripMenuItem restartToolStripMenuItem;
         private ToolStripMenuItem startToolStripMenuItem;
         private ToolStripMenuItem layToolStripMenuItem;
-        private SplitContainer splitContainer1;
-        private ContextMenuStrip contextMenuStrip1;
-        private ContextMenuStrip contextMenuStrip2;
+        //private SplitContainer splitContainer1;
+        //private ContextMenuStrip contextMenuStrip1;
+        //private ContextMenuStrip contextMenuStrip2;
         private ToolStripMenuItem designToolStripMenuItem3;
         private Button button1;
         private GroupBox groupBox1;
@@ -535,8 +547,8 @@ namespace Traffic_Simulator
         private Button button5;
         private Button button4;
         private Button button6;
-        private TableLayoutPanel tableLayoutPanel1;
-        private TableLayoutPanel tableLayoutPanel2;
+        //private TableLayoutPanel tableLayoutPanel1;
+        //private TableLayoutPanel tableLayoutPanel2;
         private Button button7;
         private Button button8;
         private Button button9;

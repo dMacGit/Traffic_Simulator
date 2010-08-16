@@ -13,11 +13,25 @@ namespace Traffic_Simulator
     {
         public MainGuiForm()
         {
+            this.IsMdiContainer = true;
             InitializeComponent();
         }
 
         private void MainGuiForm_Load(object sender, EventArgs e)
         {
+            if (sender.ToString().CompareTo("Design") == 0)
+            {
+                Console.WriteLine("Create a new Design!");
+                DesignGuiForm designGuiForm = new DesignGuiForm();
+                designGuiForm.MdiParent = this;
+                designGuiForm.Show();
+            }
+
+            if (sender.ToString().CompareTo("Simulation") == 0)
+            {
+                Console.WriteLine("Create a new Simulation!");
+            }
+
         }
 
         private void label1_Click(object sender, EventArgs e)

@@ -43,9 +43,9 @@ namespace Traffic_Simulator
         {
 
         }
-        public void openDesign(int designID)
+        public Design openDesign(int designID)
         {
-
+            return null;
         }
     }
 }
