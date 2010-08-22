@@ -11,6 +11,8 @@ namespace Traffic_Simulator
 {
     public partial class MainGuiForm : Form
     {
+        private DesignGuiForm designGuiForm;
+
         public MainGuiForm()
         {
             this.IsMdiContainer = true;
@@ -21,10 +23,22 @@ namespace Traffic_Simulator
         {
             if (sender.ToString().CompareTo("Design") == 0)
             {
-                Console.WriteLine("Create a new Design!");
-                DesignGuiForm designGuiForm = new DesignGuiForm();
-                designGuiForm.MdiParent = this;
-                designGuiForm.Show();
+                if (designGuiForm == null)
+                {
+                    Console.WriteLine("Create a new Design!");
+                    Design newTrafficDesign = new Design(this);
+                    //designGuiForm = new DesignGuiForm();
+                    //designGuiForm.Invalidate();
+                    //designGuiForm.MdiParent = this;
+                    //designGuiForm.WindowState = FormWindowState.Maximized;
+                    //designGuiForm.Refresh();
+                    //designGuiForm.Show();
+                    //this.Refresh();
+                    //this.Invalidate();
+                    
+                    
+                    //Application.DoEvents();
+                }
             }
 
             if (sender.ToString().CompareTo("Simulation") == 0)
