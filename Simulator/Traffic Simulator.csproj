@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bus.cs" />
-    <Compile Include="Curve.cs" />
+    <Compile Include="Design Toolbox\RoadUnits\Curve.cs" />
     <Compile Include="Design.cs" />
     <Compile Include="DesignGui.cs" />
     <Compile Include="DesignGuiForm.cs">
@@ -63,20 +63,20 @@
       <DependentUpon>DesignGuiForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Direction.cs" />
-    <Compile Include="EntranceExit.cs" />
+    <Compile Include="Design Toolbox\RoadUnits\EntranceExit.cs" />
     <Compile Include="MainGuiForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainGuiForm.Designer.cs">
       <DependentUpon>MainGuiForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LaneLight.cs" />
+    <Compile Include="Design Toolbox\TrafficLights\LaneLight.cs" />
     <Compile Include="LightProperties.cs" />
     <Compile Include="MainGui.cs" />
     <Compile Include="MeasurementTool.cs" />
-    <Compile Include="OffRamp.cs" />
-    <Compile Include="OnRamp.cs" />
-    <Compile Include="OnrampLight.cs" />
+    <Compile Include="Design Toolbox\RoadUnits\OffRamp.cs" />
+    <Compile Include="Design Toolbox\RoadUnits\OnRamp.cs" />
+    <Compile Include="Design Toolbox\TrafficLights\OnrampLight.cs" />
     <Compile Include="Oversized_Truck.cs" />
     <Compile Include="Private_Vehicles.cs" />
     <Compile Include="Properties.cs" />
@@ -108,13 +108,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Ramp.cs" />
-    <Compile Include="RoadSign.cs" />
-    <Compile Include="RoadUnit.cs" />
+    <Compile Include="Design Toolbox\RoadUnits\Ramp.cs" />
+    <Compile Include="Design Toolbox\RoadSigns\RoadSign.cs" />
+    <Compile Include="Design Toolbox\RoadUnits\RoadUnit.cs" />
     <Compile Include="SimulationGui.cs" />
     <Compile Include="Simulator.cs" />
-    <Compile Include="StraightRoad.cs" />
-    <Compile Include="TrafficLight.cs" />
+    <Compile Include="Design Toolbox\RoadUnits\StraightRoad.cs" />
+    <Compile Include="Design Toolbox\TrafficLights\TrafficLight.cs" />
     <Compile Include="Truck.cs" />
     <Compile Include="Van.cs" />
     <Compile Include="Vehicle.cs" />

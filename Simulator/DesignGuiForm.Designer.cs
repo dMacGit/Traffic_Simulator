@@ -48,13 +48,14 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(934, 535);
+            this.panel3.Size = new System.Drawing.Size(1010, 488);
             this.panel3.TabIndex = 3;
             // 
             // splitContainer2
             // 
             this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.IsSplitterFixed = true;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
             // 
@@ -65,8 +66,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.panel3);
-            this.splitContainer2.Size = new System.Drawing.Size(1280, 539);
-            this.splitContainer2.SplitterDistance = 338;
+            this.splitContainer2.Size = new System.Drawing.Size(1382, 492);
+            this.splitContainer2.SplitterDistance = 364;
             this.splitContainer2.TabIndex = 0;
             // 
             // panel1
@@ -77,7 +78,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(334, 535);
+            this.panel1.Size = new System.Drawing.Size(360, 488);
             this.panel1.TabIndex = 0;
             // 
             // splitContainer1
@@ -85,6 +86,7 @@
             this.splitContainer1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -96,8 +98,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(1280, 768);
-            this.splitContainer1.SplitterDistance = 539;
+            this.splitContainer1.Size = new System.Drawing.Size(1382, 784);
+            this.splitContainer1.SplitterDistance = 492;
             this.splitContainer1.TabIndex = 4;
             // 
             // groupBox1
@@ -106,7 +108,7 @@
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox1.Size = new System.Drawing.Size(1276, 221);
+            this.groupBox1.Size = new System.Drawing.Size(1378, 284);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Units";
@@ -115,15 +117,23 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            int width = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width;
-            int height = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Height;
-            this.ClientSize = new System.Drawing.Size(width, height);
+            this.ClientSize = new System.Drawing.Size(1382, 784);
+            this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MaximumSize = new System.Drawing.Size(1280, 1036);
+            this.Location = new System.Drawing.Point(0, 1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1364, 726);
             this.Name = "DesignGuiForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "DesignGuiForm";
+            this.TopMost = true;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.ResumeLayout(false);

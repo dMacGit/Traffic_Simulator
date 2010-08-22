@@ -10,10 +10,7 @@ namespace Traffic_Simulator
         {
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
-            System.Console.WriteLine("Called new DesignGui!");
-            DesignGuiForm newDesignForm = new DesignGuiForm();
-            newDesignForm.MdiParent = parentForm;
-            newDesignForm.Show();
+            
             
         }
 		public void PaintComponent(Graphics g) 

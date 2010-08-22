@@ -11,6 +11,7 @@ namespace Traffic_Simulator
         /// Required designer variable.
         /// </summary>
         private IContainer components = null;
+        
 
         /// <summary>
         /// Clean up any resources being used.
@@ -33,6 +34,7 @@ namespace Traffic_Simulator
         /// </summary>
         private void InitializeComponent()
         {
+            this.IsMdiContainer = true;
             this.components = new System.ComponentModel.Container();
             this.TrafficSimulatorMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
