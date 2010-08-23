@@ -16,10 +16,11 @@ namespace Traffic_Simulator
         private int xGrid;
         private int yGrid;
         private Image worldMapImage, miniMapImage;
-        private Point _pos;  // current image position
+        private Point _pos, _mini;  // current image position
         private int _speed;  // current speed
         private float xScale,yScale;
         private int xMiniMapGap, yMiniMapGap;
+        private float mxScale;
 
         public DesignGuiForm(Point grid)
         {
@@ -50,6 +51,10 @@ namespace Traffic_Simulator
             //Console.Write("WorldMap Painted!!\n");
             Invalidate();
             graphicsMiniMap.DrawImage(this.miniMapImage, xMiniMapGap, yMiniMapGap, miniMapImage.Width, miniMapImage.Height);
+            Pen myPen = new Pen(Color.Black, 1);
+            Rectangle newRect = new Rectangle(xMiniMapGap + _mini.X, yMiniMapGap + _mini.Y, (int)(worldMap.Width * mxScale), (int)(worldMap.Height * mxScale));
+            //Console.WriteLine("Rect bounds: " + (xMiniMapGap + (int)((_pos.X + gridBoxSize) * mxScale)) + "," + (yMiniMapGap + (int)((_pos.Y + gridBoxSize) * mxScale)) + "," + (int)(worldMap.Width * mxScale) + "," + (int)(worldMap.Height * mxScale));
+            graphicsMiniMap.DrawRectangle(myPen,newRect);
             graphicsObj.DrawImage(worldMapImage, _pos.X, _pos.Y, worldMapImage.Width, worldMapImage.Height);
             Show();
         }
@@ -59,22 +64,22 @@ namespace Traffic_Simulator
             {
                 case Keys.Left:
                     //Console.Write("you pressed the left arrow!\n");
-                    UpdatePosition(-_speed, 0);
+                    UpdatePosition(_speed, 0);
                     break;
 
                 case Keys.Right:
                     //Console.Write("you pressed the right arrow!\n");
-                    UpdatePosition(_speed, 0);
+                    UpdatePosition(-_speed, 0);
                     break;
 
                 case Keys.Up:
                     //Console.Write("you pressed the up arrow!\n");
-                    UpdatePosition(0, -_speed);
+                    UpdatePosition(0, _speed);
                     break;
 
                 case Keys.Down:
                     //Console.Write("you pressed the down arrow!\n");
-                    UpdatePosition(0, _speed);
+                    UpdatePosition(0, -_speed);
                     break;
 
                 /*case Keys.Add:
@@ -97,7 +102,7 @@ namespace Traffic_Simulator
         {
             //Console.Write("UpdatePosition!\n");
             Point newPos = new Point(_pos.X + dx, _pos.Y + dy);
-
+            Point miniPos = new Point( (int)((_pos.X + dx)*mxScale), (int)((_pos.Y + dy)*mxScale));
             // dont go out of window boundary
             //newPos.X = Math.Max(0, Math.Min(ClientSize.Width - worldMapImage.Width, newPos.X));
             //newPos.Y = Math.Max(0, Math.Min(ClientSize.Height - worldMapImage.Height, newPos.Y));
@@ -107,6 +112,7 @@ namespace Traffic_Simulator
                 //Console.Write("UpdatePosition:::if reached\n");
                 
                 _pos = newPos;
+                _mini = miniPos;
                 //Console.WriteLine("Picture pos: " + _pos.X + "," + _pos.Y);
                 Refresh();
             }
@@ -173,6 +179,7 @@ namespace Traffic_Simulator
             int destHeight = (int)(sourceHeight * nPercent);
             xScale = nPercentW;
             yScale = nPercentH;
+            mxScale = nPercent;
             if ((size.Width - destWidth) > 0)
             {
                 xMiniMapGap = (size.Width - destWidth)/2;
