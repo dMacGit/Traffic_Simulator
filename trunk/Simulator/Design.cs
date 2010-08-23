@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,9 @@ namespace Traffic_Simulator
         private int designID;
         private Design design;
         private MainGuiForm parent;
+        private int mapWidthBounds;
+        private Point worldBounds;
+        private Point defaultWorld = new Point(128,64);
 
         /**
          * 
@@ -26,13 +30,16 @@ namespace Traffic_Simulator
         public Design(MainGuiForm parent)
         {
             System.Console.WriteLine("Called new DesignGui!");
-            DesignGuiForm newDesignForm = new DesignGuiForm();
+            DesignGuiForm newDesignForm = new DesignGuiForm(defaultWorld);
             newDesignForm.MdiParent = parent;
             newDesignForm.WindowState = FormWindowState.Maximized;
-            //designGuiForm.Refresh();
+            this.worldBounds = this.defaultWorld;
+            //newDesignForm.mapBounds = worldBounds;
+            //System.Console.WriteLine("Set world bounds: " + newDesignForm.mapBounds);
             newDesignForm.Show();
+            newDesignForm.Refresh();
+            
         }
-
         public void addRoadUnit(RoadUnit roadUnit)
         {
 
