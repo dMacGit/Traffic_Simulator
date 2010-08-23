@@ -19,7 +19,6 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -28,90 +27,90 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.worldMap = new System.Windows.Forms.Panel();
+            this.mapSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.miniMapPanel = new System.Windows.Forms.Panel();
+            this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.componentPalletGroup = new System.Windows.Forms.GroupBox();
+            this.mapSplitContainer.Panel1.SuspendLayout();
+            this.mapSplitContainer.Panel2.SuspendLayout();
+            this.mapSplitContainer.SuspendLayout();
+            this.mainSplitContainer.Panel1.SuspendLayout();
+            this.mainSplitContainer.Panel2.SuspendLayout();
+            this.mainSplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel3
+            // worldMap
             // 
-            this.panel3.BackColor = System.Drawing.Color.Green;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1010, 488);
-            this.panel3.TabIndex = 3;
+            this.worldMap.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.worldMap.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.worldMap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.worldMap.Location = new System.Drawing.Point(0, 0);
+            this.worldMap.Name = "worldMap";
+            this.worldMap.Size = new System.Drawing.Size(885, 485);
+            this.worldMap.TabIndex = 3;
             // 
-            // splitContainer2
+            // mapSplitContainer
             // 
-            this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.IsSplitterFixed = true;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
+            this.mapSplitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.mapSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapSplitContainer.IsSplitterFixed = true;
+            this.mapSplitContainer.Location = new System.Drawing.Point(0, 0);
+            this.mapSplitContainer.Name = "mapSplitContainer";
             // 
-            // splitContainer2.Panel1
+            // mapSplitContainer.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.panel1);
+            this.mapSplitContainer.Panel1.Controls.Add(this.miniMapPanel);
             // 
-            // splitContainer2.Panel2
+            // mapSplitContainer.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.panel3);
-            this.splitContainer2.Size = new System.Drawing.Size(1382, 492);
-            this.splitContainer2.SplitterDistance = 364;
-            this.splitContainer2.TabIndex = 0;
+            this.mapSplitContainer.Panel2.Controls.Add(this.worldMap);
+            this.mapSplitContainer.Size = new System.Drawing.Size(1378, 489);
+            this.mapSplitContainer.SplitterDistance = 485;
+            this.mapSplitContainer.TabIndex = 0;
             // 
-            // panel1
+            // miniMapPanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.Green;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(360, 488);
-            this.panel1.TabIndex = 0;
+            this.miniMapPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.miniMapPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.miniMapPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.miniMapPanel.Location = new System.Drawing.Point(0, 0);
+            this.miniMapPanel.Name = "miniMapPanel";
+            this.miniMapPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.miniMapPanel.Size = new System.Drawing.Size(481, 485);
+            this.miniMapPanel.TabIndex = 0;
             // 
-            // splitContainer1
+            // mainSplitContainer
             // 
-            this.splitContainer1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.mainSplitContainer.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.mainSplitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.mainSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainSplitContainer.IsSplitterFixed = true;
+            this.mainSplitContainer.Location = new System.Drawing.Point(0, 0);
+            this.mainSplitContainer.Name = "mainSplitContainer";
+            this.mainSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer1.Panel1
+            // mainSplitContainer.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
+            this.mainSplitContainer.Panel1.Controls.Add(this.mapSplitContainer);
             // 
-            // splitContainer1.Panel2
+            // mainSplitContainer.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(1382, 784);
-            this.splitContainer1.SplitterDistance = 492;
-            this.splitContainer1.TabIndex = 4;
+            this.mainSplitContainer.Panel2.Controls.Add(this.componentPalletGroup);
+            this.mainSplitContainer.Size = new System.Drawing.Size(1378, 780);
+            this.mainSplitContainer.SplitterDistance = 489;
+            this.mainSplitContainer.TabIndex = 4;
             // 
-            // groupBox1
+            // componentPalletGroup
             // 
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox1.Size = new System.Drawing.Size(1378, 284);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Units";
+            this.componentPalletGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.componentPalletGroup.Location = new System.Drawing.Point(0, 0);
+            this.componentPalletGroup.Name = "componentPalletGroup";
+            this.componentPalletGroup.Padding = new System.Windows.Forms.Padding(5);
+            this.componentPalletGroup.Size = new System.Drawing.Size(1374, 283);
+            this.componentPalletGroup.TabIndex = 0;
+            this.componentPalletGroup.TabStop = false;
+            this.componentPalletGroup.Text = "Units";
             // 
             // DesignGuiForm
             // 
@@ -119,10 +118,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1382, 784);
+            this.ClientSize = new System.Drawing.Size(1378, 780);
             this.ControlBox = false;
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.mainSplitContainer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.Location = new System.Drawing.Point(0, 1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -131,25 +131,27 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "DesignGuiForm";
+            this.Text = "newDesign";
             this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.ResumeLayout(false);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.DesignGuiForm_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.worldMap_KeyDown);
+            this.mapSplitContainer.Panel1.ResumeLayout(false);
+            this.mapSplitContainer.Panel2.ResumeLayout(false);
+            this.mapSplitContainer.ResumeLayout(false);
+            this.mainSplitContainer.Panel1.ResumeLayout(false);
+            this.mainSplitContainer.Panel2.ResumeLayout(false);
+            this.mainSplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Panel worldMap;
+        private System.Windows.Forms.SplitContainer mapSplitContainer;
+        private System.Windows.Forms.SplitContainer mainSplitContainer;
+        private System.Windows.Forms.Panel miniMapPanel;
+        private System.Windows.Forms.GroupBox componentPalletGroup;
     }
 }
