@@ -27,17 +27,6 @@ namespace Traffic_Simulator
                 {
                     Console.WriteLine("Create a new Design!");
                     Design newTrafficDesign = new Design(this);
-                    //designGuiForm = new DesignGuiForm();
-                    //designGuiForm.Invalidate();
-                    //designGuiForm.MdiParent = this;
-                    //designGuiForm.WindowState = FormWindowState.Maximized;
-                    //designGuiForm.Refresh();
-                    //designGuiForm.Show();
-                    //this.Refresh();
-                    //this.Invalidate();
-                    
-                    
-                    //Application.DoEvents();
                 }
             }
 
