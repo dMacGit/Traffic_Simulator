@@ -21,9 +21,12 @@ namespace Traffic_Simulator
         private float xScale,yScale;
         private int xMiniMapGap, yMiniMapGap;
         private float mxScale;
+        private bool hasSelectedTile = false;
+        private PictureBox selected;
 
-        public DesignGuiForm(Point grid)
+        public DesignGuiForm(Point grid, String name)
         {
+            this.Name = name;
             this.xGrid = grid.X;
             this.yGrid = grid.Y;
             worldMapImage = CreateWorldImage();
@@ -56,7 +59,7 @@ namespace Traffic_Simulator
             //Console.WriteLine("Rect bounds: " + (xMiniMapGap + (int)((_pos.X + gridBoxSize) * mxScale)) + "," + (yMiniMapGap + (int)((_pos.Y + gridBoxSize) * mxScale)) + "," + (int)(worldMap.Width * mxScale) + "," + (int)(worldMap.Height * mxScale));
             graphicsMiniMap.DrawRectangle(myPen,newRect);
             graphicsObj.DrawImage(worldMapImage, _pos.X, _pos.Y, worldMapImage.Width, worldMapImage.Height);
-            Show();
+            //Show();
         }
         private void worldMap_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
@@ -213,6 +216,96 @@ namespace Traffic_Simulator
             graphicsObj.Dispose();
             // return the picture
             return canvas;
+        }
+        private void offRampClicked(object sender, EventArgs e)
+        {
+            if (selected != null && selected.Equals(offRampIcon))
+            {
+                offRampIcon.BackColor = Color.Transparent;
+                selected = null;
+            }
+            else
+            {
+                if (selected != null)
+                {
+                    selected.BackColor = Color.Transparent;
+                }
+                offRampIcon.BackColor = Color.Black;
+                selected = offRampIcon;
+            }
+            Refresh();
+        }
+        private void onRampClicked(object sender, EventArgs e)
+        {
+            if (selected != null && selected.Equals(onRampIcon))
+            {
+                onRampIcon.BackColor = Color.Transparent;
+                selected = null;
+            }
+            else
+            {
+                if (selected != null)
+                {
+                    selected.BackColor = Color.Transparent;
+                }
+                onRampIcon.BackColor = Color.Black;
+                selected = onRampIcon;
+            }
+            Refresh();            
+        }
+        private void singleRoadClicked(object sender, EventArgs e)
+        {
+            if (selected != null && selected.Equals(singleRoadIcon))
+            {
+                singleRoadIcon.BackColor = Color.Transparent;
+                selected = null;
+            }
+            else
+            {
+                if (selected != null)
+                {
+                    selected.BackColor = Color.Transparent;
+                }
+                singleRoadIcon.BackColor = Color.Black;
+                selected = singleRoadIcon;
+            }
+            Refresh();
+        }
+        private void twoLaneMwayClicked(object sender, EventArgs e)
+        {
+            if (selected != null && selected.Equals(twoLaneMwayIcon))
+            {
+                twoLaneMwayIcon.BackColor = Color.Transparent;
+                selected = null;
+            }
+            else
+            {
+                if (selected != null)
+                {
+                    selected.BackColor = Color.Transparent;
+                }
+                twoLaneMwayIcon.BackColor = Color.Black;
+                selected = twoLaneMwayIcon;
+            }
+            Refresh();
+        }
+        private void threeLaneMwayClicked(object sender, EventArgs e)
+        {
+            if (selected != null && selected.Equals(threeLaneMwayIcon))
+            {
+                threeLaneMwayIcon.BackColor = Color.Transparent;
+                selected = null;
+            }
+            else
+            {
+                if (selected != null)
+                {
+                    selected.BackColor = Color.Transparent;
+                }
+                threeLaneMwayIcon.BackColor = Color.Black;
+                selected = threeLaneMwayIcon;
+            }
+            Refresh();
         }
     }
 }

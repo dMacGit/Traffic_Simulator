@@ -9,17 +9,20 @@ namespace Traffic_Simulator
 {
     //Design Controller
 
-    class Design
+    public class Design
     {
         private RoadUnit[] roadUnits;
         private RoadSign[] roadSigns;
         private TrafficLight[] trafficLights;
         private int designID;
+        private String designName;
         private Design design;
         private MainGuiForm parent;
         private int mapWidthBounds;
         private Point worldBounds;
         private Point defaultWorld = new Point(128,64);
+        private DesignGuiForm newDesignForm;
+        private newDesign createNewDesign;
 
         /**
          * 
@@ -29,16 +32,25 @@ namespace Traffic_Simulator
 
         public Design(MainGuiForm parent)
         {
+            this.parent = parent;
             System.Console.WriteLine("Called new DesignGui!");
-            DesignGuiForm newDesignForm = new DesignGuiForm(defaultWorld);
+            createNewDesign = new newDesign(this);
+            createNewDesign.Show();
+        }
+        public void designParameterSet()
+        {
+
+            this.worldBounds = createNewDesign.worldBounds;
+            this.designName = createNewDesign.designName;
+            System.Console.WriteLine("Design name: " + designName);
+            System.Console.WriteLine("Set world bounds: " + worldBounds);
+            createNewDesign.Dispose();
+            newDesignForm = new DesignGuiForm(worldBounds, designName);
+            parent.Name = designName;
             newDesignForm.MdiParent = parent;
             newDesignForm.WindowState = FormWindowState.Maximized;
-            this.worldBounds = this.defaultWorld;
-            //newDesignForm.mapBounds = worldBounds;
-            //System.Console.WriteLine("Set world bounds: " + newDesignForm.mapBounds);
             newDesignForm.Show();
             newDesignForm.Refresh();
-            
         }
         public void addRoadUnit(RoadUnit roadUnit)
         {
@@ -72,5 +84,10 @@ namespace Traffic_Simulator
         {
             return null;
         }
+        /*private void isFinished(object sender, EventArgs e)
+        {
+            createNewDesign.Dispose();
+            designParameterSet();
+        }*/
     }
 }
