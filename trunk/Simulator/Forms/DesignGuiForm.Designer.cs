@@ -36,12 +36,12 @@
             this.twoLaneMwayText = new System.Windows.Forms.Label();
             this.threeLaneMwayText = new System.Windows.Forms.Label();
             this.singleRoadText = new System.Windows.Forms.Label();
-            this.MwayRamps = new System.Windows.Forms.GroupBox();
-            this.onRampText = new System.Windows.Forms.Label();
-            this.offRampText = new System.Windows.Forms.Label();
             this.singleRoadIcon = new System.Windows.Forms.PictureBox();
             this.twoLaneMwayIcon = new System.Windows.Forms.PictureBox();
             this.threeLaneMwayIcon = new System.Windows.Forms.PictureBox();
+            this.MwayRamps = new System.Windows.Forms.GroupBox();
+            this.onRampText = new System.Windows.Forms.Label();
+            this.offRampText = new System.Windows.Forms.Label();
             this.onRampIcon = new System.Windows.Forms.PictureBox();
             this.offRampIcon = new System.Windows.Forms.PictureBox();
             this.mapSplitContainer.Panel1.SuspendLayout();
@@ -52,10 +52,10 @@
             this.mainSplitContainer.SuspendLayout();
             this.componentPalletGroup.SuspendLayout();
             this.MwayLanes.SuspendLayout();
-            this.MwayRamps.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.singleRoadIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.twoLaneMwayIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.threeLaneMwayIcon)).BeginInit();
+            this.MwayRamps.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.onRampIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.offRampIcon)).BeginInit();
             this.SuspendLayout();
@@ -65,10 +65,14 @@
             this.worldMap.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.worldMap.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.worldMap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.worldMap.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.worldMap.Location = new System.Drawing.Point(0, 0);
             this.worldMap.Name = "worldMap";
             this.worldMap.Size = new System.Drawing.Size(885, 485);
             this.worldMap.TabIndex = 3;
+            this.worldMap.MouseLeave += new System.EventHandler(this.worldViewExited);
+            this.worldMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.recalculateMousePoint);
+            this.worldMap.MouseEnter += new System.EventHandler(this.worldViewEntred);
             // 
             // mapSplitContainer
             // 
@@ -186,43 +190,6 @@
             this.singleRoadText.TabIndex = 5;
             this.singleRoadText.Text = "Single Road";
             // 
-            // MwayRamps
-            // 
-            this.MwayRamps.Controls.Add(this.onRampText);
-            this.MwayRamps.Controls.Add(this.offRampText);
-            this.MwayRamps.Controls.Add(this.onRampIcon);
-            this.MwayRamps.Controls.Add(this.offRampIcon);
-            this.MwayRamps.Location = new System.Drawing.Point(21, 21);
-            this.MwayRamps.Name = "MwayRamps";
-            this.MwayRamps.Size = new System.Drawing.Size(181, 145);
-            this.MwayRamps.TabIndex = 5;
-            this.MwayRamps.TabStop = false;
-            this.MwayRamps.Text = "Ramps";
-            // 
-            // onRampText
-            // 
-            this.onRampText.AutoSize = true;
-            this.onRampText.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.onRampText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.onRampText.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.onRampText.Location = new System.Drawing.Point(90, 101);
-            this.onRampText.Name = "onRampText";
-            this.onRampText.Size = new System.Drawing.Size(68, 17);
-            this.onRampText.TabIndex = 3;
-            this.onRampText.Text = "On Ramp";
-            // 
-            // offRampText
-            // 
-            this.offRampText.AutoSize = true;
-            this.offRampText.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.offRampText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.offRampText.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.offRampText.Location = new System.Drawing.Point(90, 37);
-            this.offRampText.Name = "offRampText";
-            this.offRampText.Size = new System.Drawing.Size(68, 17);
-            this.offRampText.TabIndex = 2;
-            this.offRampText.Text = "Off Ramp";
-            // 
             // singleRoadIcon
             // 
             this.singleRoadIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -265,6 +232,43 @@
             this.threeLaneMwayIcon.TabStop = false;
             this.threeLaneMwayIcon.Click += new System.EventHandler(this.threeLaneMwayClicked);
             // 
+            // MwayRamps
+            // 
+            this.MwayRamps.Controls.Add(this.onRampText);
+            this.MwayRamps.Controls.Add(this.offRampText);
+            this.MwayRamps.Controls.Add(this.onRampIcon);
+            this.MwayRamps.Controls.Add(this.offRampIcon);
+            this.MwayRamps.Location = new System.Drawing.Point(21, 21);
+            this.MwayRamps.Name = "MwayRamps";
+            this.MwayRamps.Size = new System.Drawing.Size(181, 145);
+            this.MwayRamps.TabIndex = 5;
+            this.MwayRamps.TabStop = false;
+            this.MwayRamps.Text = "Ramps";
+            // 
+            // onRampText
+            // 
+            this.onRampText.AutoSize = true;
+            this.onRampText.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.onRampText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.onRampText.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.onRampText.Location = new System.Drawing.Point(90, 101);
+            this.onRampText.Name = "onRampText";
+            this.onRampText.Size = new System.Drawing.Size(68, 17);
+            this.onRampText.TabIndex = 3;
+            this.onRampText.Text = "On Ramp";
+            // 
+            // offRampText
+            // 
+            this.offRampText.AutoSize = true;
+            this.offRampText.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.offRampText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.offRampText.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.offRampText.Location = new System.Drawing.Point(90, 37);
+            this.offRampText.Name = "offRampText";
+            this.offRampText.Size = new System.Drawing.Size(68, 17);
+            this.offRampText.TabIndex = 2;
+            this.offRampText.Text = "Off Ramp";
+            // 
             // onRampIcon
             // 
             this.onRampIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -303,7 +307,6 @@
             this.ControlBox = false;
             this.Controls.Add(this.mainSplitContainer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.KeyPreview = true;
             this.Location = new System.Drawing.Point(0, 1);
             this.MaximizeBox = false;
@@ -327,11 +330,11 @@
             this.componentPalletGroup.ResumeLayout(false);
             this.MwayLanes.ResumeLayout(false);
             this.MwayLanes.PerformLayout();
-            this.MwayRamps.ResumeLayout(false);
-            this.MwayRamps.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.singleRoadIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.twoLaneMwayIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.threeLaneMwayIcon)).EndInit();
+            this.MwayRamps.ResumeLayout(false);
+            this.MwayRamps.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.onRampIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.offRampIcon)).EndInit();
             this.ResumeLayout(false);

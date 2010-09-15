@@ -10,7 +10,7 @@ namespace Traffic_Simulator
     {
         private Form displayPanel;
         private DesignGuiForm designGuiForm;
-        private DesignGui designGui;
+        private static MainGuiForm mainDisplay_Static;
 
         //private SimulationGuiForm simulationGuiForm;
 
@@ -23,7 +23,8 @@ namespace Traffic_Simulator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainGuiForm());
+            mainDisplay_Static = new MainGuiForm();
+            Application.Run(mainDisplay_Static);
         }
         public Graphics GetDisplay()
         {

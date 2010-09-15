@@ -16,6 +16,25 @@
     <SccLocalPath>Svn</SccLocalPath>
     <SccAuxPath>Svn</SccAuxPath>
     <SccProvider>SubversionScc</SccProvider>
+    <ManifestCertificateThumbprint>7B48A06CA6914E67D62B18AA348C10904C1808D5</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Traffic Simulator_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,50 +71,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bus.cs" />
+    <Compile Include="Simulation ToolBox\Bus.cs" />
     <Compile Include="Design Toolbox\RoadUnits\Curve.cs" />
     <Compile Include="Design.cs" />
-    <Compile Include="DesignGui.cs" />
-    <Compile Include="DesignGuiForm.cs">
+    <Compile Include="Forms\DesignGuiForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DesignGuiForm.Designer.cs">
+    <Compile Include="Forms\DesignGuiForm.Designer.cs">
       <DependentUpon>DesignGuiForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Direction.cs" />
+    <Compile Include="Design Toolbox\Direction.cs" />
     <Compile Include="Design Toolbox\RoadUnits\EntranceExit.cs" />
-    <Compile Include="MainGuiForm.cs">
+    <Compile Include="Forms\MainGuiForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainGuiForm.Designer.cs">
+    <Compile Include="Forms\MainGuiForm.Designer.cs">
       <DependentUpon>MainGuiForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Design Toolbox\TrafficLights\LaneLight.cs" />
-    <Compile Include="LightProperties.cs" />
+    <Compile Include="Design Toolbox\LightProperties.cs" />
     <Compile Include="MainGui.cs" />
-    <Compile Include="MeasurementTool.cs" />
+    <Compile Include="Simulation ToolBox\MeasurementTool.cs" />
     <Compile Include="Design Toolbox\RoadUnits\OffRamp.cs" />
     <Compile Include="Design Toolbox\RoadUnits\OnRamp.cs" />
     <Compile Include="Design Toolbox\TrafficLights\OnrampLight.cs" />
-    <Compile Include="newDesign.cs">
+    <Compile Include="Forms\newDesign.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="newDesign.Designer.cs">
+    <Compile Include="Forms\newDesign.Designer.cs">
       <DependentUpon>newDesign.cs</DependentUpon>
     </Compile>
-    <Compile Include="Oversized_Truck.cs" />
-    <Compile Include="Private_Vehicles.cs" />
-    <Compile Include="Properties.cs" />
+    <Compile Include="Simulation ToolBox\Oversized_Truck.cs" />
+    <Compile Include="Simulation ToolBox\Private_Vehicles.cs" />
+    <Compile Include="Simulation ToolBox\Properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="DesignGuiForm.resx">
+    <EmbeddedResource Include="Forms\DesignGuiForm.resx">
       <DependentUpon>DesignGuiForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainGuiForm.resx">
+    <EmbeddedResource Include="Forms\MainGuiForm.resx">
       <DependentUpon>MainGuiForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="newDesign.resx">
+    <EmbeddedResource Include="Forms\newDesign.resx">
       <DependentUpon>newDesign.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -125,9 +143,9 @@
     <Compile Include="Simulator.cs" />
     <Compile Include="Design Toolbox\RoadUnits\StraightRoad.cs" />
     <Compile Include="Design Toolbox\TrafficLights\TrafficLight.cs" />
-    <Compile Include="Truck.cs" />
-    <Compile Include="Van.cs" />
-    <Compile Include="Vehicle.cs" />
+    <Compile Include="Simulation ToolBox\Truck.cs" />
+    <Compile Include="Simulation ToolBox\Van.cs" />
+    <Compile Include="Simulation ToolBox\Vehicle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\File-Icon 30x30.png" />
@@ -142,6 +160,12 @@
     <None Include="Resources\design_Icon.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\2_Lane_Hway.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\3_lane_Hway.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Resources\BigTruck.png" />
     <Content Include="Resources\bike.png" />
     <Content Include="Resources\bus.png" />
@@ -153,7 +177,30 @@
     <Content Include="Resources\SmlTruck.png" />
     <None Include="Resources\TwoLaneHwayIcon.gif" />
     <None Include="Resources\ThreeLaneHwayIcon.gif" />
+    <None Include="Traffic Simulator_TemporaryKey.pfx" />
     <Content Include="Resources\van.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
