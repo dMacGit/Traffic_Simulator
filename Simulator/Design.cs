@@ -23,6 +23,7 @@ namespace Traffic_Simulator
         private Point defaultWorld = new Point(128,64);
         private DesignGuiForm newDesignForm;
         private newDesign createNewDesign;
+        private int[,] designUnitArray;
 
         /**
          * 
@@ -39,14 +40,19 @@ namespace Traffic_Simulator
         }
         public void designParameterSet()
         {
-
+            //The box to set design parameters.
             this.worldBounds = createNewDesign.worldBounds;
             this.designName = createNewDesign.designName;
             System.Console.WriteLine("Design name: " + designName);
             System.Console.WriteLine("Set world bounds: " + worldBounds);
+            designUnitArray = new int[worldBounds.X, worldBounds.Y];
             createNewDesign.Dispose();
             newDesignForm = new DesignGuiForm(worldBounds, designName);
-            parent.Name = designName;
+            System.Console.WriteLine("Main Display name changed from: " + parent.Text);
+            parent.Text = designName;
+            System.Console.WriteLine(" to: " + parent.Text);
+            parent.Refresh();
+            parent.Show();
             newDesignForm.MdiParent = parent;
             newDesignForm.WindowState = FormWindowState.Maximized;
             newDesignForm.Show();
