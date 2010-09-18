@@ -28,10 +28,13 @@ namespace Traffic_Simulator
         private Graphics graphicsObj = null, graphicsMiniMap = null;
 
         //Images for world grid, mini map etc.
-        private Image worldMapImage, miniMapImage, unitToPlace;
+        private Image worldMapImage, miniMapImage, gridImages;
 
         //Current image position
         private Point newMainMapPos, newMiniMapPos;
+
+        //Mouse Entered grid boolean
+        private bool mouseEnteredView = false;
 
         //The unit
         private RoadUnit newUnit;
@@ -89,6 +92,7 @@ namespace Traffic_Simulator
 
             //Create the world grid image
             worldMapImage = CreateWorldImage();
+            gridImages = new Bitmap(xGrid * gridBoxSize, yGrid * gridBoxSize);
             
             //Speed to move grid: 20 pixles / key press
             movementSpeed = 20;
@@ -228,9 +232,10 @@ namespace Traffic_Simulator
             }
             for (int xPos = 0; xPos < xGrid; xPos++)
             {
+                /*
                 Console.WriteLine("xPos: " + xPos + " | First - start @: " + ((xPos * gridBoxSize) + worldBoarderSize)
                     + "," + worldBoarderSize + " End @: " + ((xPos * gridBoxSize) + worldBoarderSize) + "," + (yGrid * gridBoxSize + worldBoarderSize) + "] :::: Second - start @: "
-                    + (((xPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize) + "," + worldBoarderSize + " End @: " + (((xPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize) + "," + (yGrid * gridBoxSize + worldBoarderSize));
+                    + (((xPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize) + "," + worldBoarderSize + " End @: " + (((xPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize) + "," + (yGrid * gridBoxSize + worldBoarderSize));*/
                 graphicsObj.DrawLine(myPen, (xPos * gridBoxSize) + worldBoarderSize, worldBoarderSize, (xPos * gridBoxSize) + worldBoarderSize, yGrid * gridBoxSize + worldBoarderSize);
                 graphicsObj.DrawLine(myPen, ((xPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize, worldBoarderSize, ((xPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize, yGrid * gridBoxSize + worldBoarderSize);
             }
@@ -278,7 +283,7 @@ namespace Traffic_Simulator
 
             Bitmap b = new Bitmap(destWidth, destHeight);
             Graphics g = Graphics.FromImage((Image)b);
-           
+
             //g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.Dispose();                                          
 
@@ -353,6 +358,19 @@ namespace Traffic_Simulator
                 }
                 singleRoadIcon.BackColor = Color.Black;
                 selected = singleRoadIcon;
+                Assembly myAssembly = Assembly.GetExecutingAssembly();
+                newUnit = new RoadUnit();
+                newUnit.unitImage = new Bitmap(System.Reflection.Assembly.GetEntryAssembly().GetManifestResourceStream("Traffic_Simulator.Resources.Single_Road.png"));
+                newUnit.NumOfLanes = 1;
+                newUnit.Width = 1 * gridBoxSize;
+                newUnit.Height = 1 * gridBoxSize;
+
+                if (this.unitOrientation == DIRECTION_NORTH)
+                {
+                    xSize = newUnit.Width;
+                    ySize = newUnit.Height;
+                }
+                this.cursorOffset = new Point(xSize / 2, ySize / 2);
             }
             Refresh();
         }
@@ -374,6 +392,19 @@ namespace Traffic_Simulator
                 }
                 twoLaneMwayIcon.BackColor = Color.Black;
                 selected = twoLaneMwayIcon;
+                Assembly myAssembly = Assembly.GetExecutingAssembly();
+                newUnit = new RoadUnit();
+                newUnit.unitImage = new Bitmap(System.Reflection.Assembly.GetEntryAssembly().GetManifestResourceStream("Traffic_Simulator.Resources.2_Lane_Hway.png"));
+                newUnit.NumOfLanes = 2;
+                newUnit.Width = 2 * gridBoxSize;
+                newUnit.Height = 1 * gridBoxSize;
+
+                if (this.unitOrientation == DIRECTION_NORTH)
+                {
+                    xSize = newUnit.Width;
+                    ySize = newUnit.Height;
+                }
+                this.cursorOffset = new Point(xSize / 2, ySize / 2);
             }
             Refresh();
         }
@@ -382,7 +413,6 @@ namespace Traffic_Simulator
             if (selected != null && selected.Equals(threeLaneMwayIcon))
             {
                 threeLaneMwayIcon.BackColor = Color.Transparent;
-                unitToPlace = null;
                 selected = null;
                 newUnit = null;
             }
@@ -395,11 +425,6 @@ namespace Traffic_Simulator
                 threeLaneMwayIcon.BackColor = Color.Black;
                 selected = threeLaneMwayIcon;
                 Assembly myAssembly = Assembly.GetExecutingAssembly();
-                string[] names = myAssembly.GetManifestResourceNames();
-                foreach (string name in names)
-                {
-                    Console.WriteLine(name);
-                }
                 newUnit = new RoadUnit();
                 newUnit.unitImage = new Bitmap(System.Reflection.Assembly.GetEntryAssembly().GetManifestResourceStream("Traffic_Simulator.Resources.3_lane_Hway.png"));
                 newUnit.NumOfLanes = 3;
@@ -421,6 +446,7 @@ namespace Traffic_Simulator
             if (selected != null)
             {
                 this.Cursor = Cursors.Cross;
+                mouseEnteredView = true;
             }
             else
                 this.Cursor = Cursors.Default;
@@ -429,13 +455,11 @@ namespace Traffic_Simulator
         private void worldViewExited(object sender, EventArgs e)
         {
             this.Cursor = Cursors.Default;
+            mouseEnteredView = false;
         }
 
         private void recalculateMousePoint(object sender, MouseEventArgs e)
         {
-
-            snappedToGrid = snapToGrid(snapWithinWorldBounds());
-            
             if ((int)e.X != mousePosition.X || (int)e.Y != mousePosition.Y)
             {
                 mousePosition.X = e.X;
@@ -443,6 +467,7 @@ namespace Traffic_Simulator
             }
             if (newUnit != null)
             {
+                snappedToGrid = snapToGrid(snapWithinWorldBounds());
                 if (snappedToGrid.X != lastSnappedToGrid.X || snappedToGrid.Y != lastSnappedToGrid.Y)
                 {
                     lastSnappedToGrid = snappedToGrid;
@@ -509,17 +534,20 @@ namespace Traffic_Simulator
         }
         private Point snapToGrid(Point snappedWithinPoint)
         {
-            int xGridNum = snappedWithinPoint.X / gridBoxSize;
-            int yGridNum = snappedWithinPoint.Y / gridBoxSize;
-            int xPos = gridBoxSize * xGridNum;
-            int yPos = gridBoxSize * yGridNum;
+            int xGrid_No_Offset = snappedWithinPoint.X / gridBoxSize;
+            int yGrid_No_Offset = snappedWithinPoint.Y / gridBoxSize;
+            int xGridNum = xGrid_No_Offset - (worldBoarderSize / gridBoxSize) - (newMainMapPos.X / gridBoxSize);
+            int yGridNum = yGrid_No_Offset - (worldBoarderSize / gridBoxSize) - (newMainMapPos.Y / gridBoxSize);
+            newUnit.gridValue = new Point(xGridNum, yGridNum);
+            int xPos = gridBoxSize * xGrid_No_Offset;
+            int yPos = gridBoxSize * yGrid_No_Offset;
             return new Point(xPos, yPos);
         }
         private void mainWindowPaint(object sender, PaintEventArgs e)
         {
             Graphics graphicsObj = this.worldMap.CreateGraphics();
             graphicsObj.DrawImage(worldMapImage, newMainMapPos.X, newMainMapPos.Y, worldMapImage.Width, worldMapImage.Height);
-            if (newUnit != null)
+            if (newUnit != null && mouseEnteredView)
             {
                 graphicsObj.DrawImage(newUnit.unitImage, newUnit.unitPosition.X, newUnit.unitPosition.Y);
             }
@@ -528,10 +556,27 @@ namespace Traffic_Simulator
 
         private void addUnitToGrid(object sender, MouseEventArgs e)
         {
-            if (newUnit != null)
+            switch (e.Button)
             {
-                design.addRoadUnit(newUnit);
-            }
+                case MouseButtons.Left:
+                    if (newUnit != null)
+                    {
+                        if (design.addRoadUnit(newUnit))
+                        {
+                            Graphics imageGraphics = Graphics.FromImage(worldMapImage);
+                            design.modifiedUnitArray[newUnit.gridValue.Y, newUnit.gridValue.X].Draw(imageGraphics, -newMainMapPos.X, -newMainMapPos.Y);
+                        }
+                        else
+                            System.Console.WriteLine("Couldn't add to grid @: " + newUnit.gridValue.Y + "," + newUnit.gridValue.X);
+                    }
+                    break;
+                case MouseButtons.Right:
+                    break;
+                case MouseButtons.Middle:
+                    break;
+                default:
+                    break;
+            } 
         }
     }
 }
