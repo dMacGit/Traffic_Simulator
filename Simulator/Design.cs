@@ -47,7 +47,7 @@ namespace Traffic_Simulator
             System.Console.WriteLine("Set world bounds: " + worldBounds);
             designUnitArray = new int[worldBounds.X, worldBounds.Y];
             createNewDesign.Dispose();
-            newDesignForm = new DesignGuiForm(worldBounds, designName);
+            newDesignForm = new DesignGuiForm(worldBounds, designName,this);
             System.Console.WriteLine("Main Display name changed from: " + parent.Text);
             parent.Text = designName;
             System.Console.WriteLine(" to: " + parent.Text);

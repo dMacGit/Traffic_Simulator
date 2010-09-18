@@ -62,22 +62,26 @@
             // 
             // worldMap
             // 
+            this.worldMap.AutoScroll = true;
             this.worldMap.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.worldMap.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.worldMap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.worldMap.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.worldMap.ImeMode = System.Windows.Forms.ImeMode.On;
             this.worldMap.Location = new System.Drawing.Point(0, 0);
             this.worldMap.Name = "worldMap";
             this.worldMap.Size = new System.Drawing.Size(885, 485);
             this.worldMap.TabIndex = 3;
             this.worldMap.MouseLeave += new System.EventHandler(this.worldViewExited);
+            this.worldMap.Paint += new System.Windows.Forms.PaintEventHandler(this.mainWindowPaint);
             this.worldMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.recalculateMousePoint);
+            this.worldMap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.addUnitToGrid);
             this.worldMap.MouseEnter += new System.EventHandler(this.worldViewEntred);
             // 
             // mapSplitContainer
             // 
             this.mapSplitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.mapSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapSplitContainer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.mapSplitContainer.IsSplitterFixed = true;
             this.mapSplitContainer.Location = new System.Drawing.Point(0, 0);
             this.mapSplitContainer.Name = "mapSplitContainer";
@@ -95,7 +99,7 @@
             // 
             // miniMapPanel
             // 
-            this.miniMapPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.miniMapPanel.BackColor = System.Drawing.SystemColors.ControlLight;
             this.miniMapPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.miniMapPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.miniMapPanel.Location = new System.Drawing.Point(0, 0);
@@ -103,6 +107,7 @@
             this.miniMapPanel.Padding = new System.Windows.Forms.Padding(5);
             this.miniMapPanel.Size = new System.Drawing.Size(481, 485);
             this.miniMapPanel.TabIndex = 0;
+            this.miniMapPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.miniOnPaint);
             // 
             // mainSplitContainer
             // 
@@ -316,10 +321,9 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "newDesign";
+            this.Text = "Design";
             this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.DesignGuiForm_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.worldMap_KeyDown);
             this.mapSplitContainer.Panel1.ResumeLayout(false);
             this.mapSplitContainer.Panel2.ResumeLayout(false);
