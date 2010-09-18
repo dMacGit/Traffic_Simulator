@@ -8,9 +8,9 @@ namespace Traffic_Simulator
 		private int unitID;
 		private Direction direction;
 		private RoadUnit[] roadUnits;
-		private Point unitCoordinates;
+        private Point unitCoordinates, gridNum;
 		private RoadUnit roadUnit;
-		private int numOfLanes, width, height;
+        private int numOfLanes, width, height;
         private Image image;
 
 		public int UnitID 
@@ -47,10 +47,15 @@ namespace Traffic_Simulator
             get { return height; }
             set { height = value; }
         }
-        public void Draw(System.Drawing.Graphics c, Graphics g)
+        public void Draw(Graphics g, int xOffset, int yOffset)
         {
-			throw new System.Exception("Not implemented");
+            g.DrawImage(image, unitCoordinates.X + xOffset, unitCoordinates.Y + yOffset, width, height);
 		}
+        public Point gridValue
+        {
+            get { return gridNum; }
+            set { gridNum = value; }
+        }
 	}
 
 }
