@@ -13,46 +13,110 @@ namespace Traffic_Simulator
 {
     public partial class DesignGuiForm : Form
     {
-        private int gridBoxSize = 20;
+        //Design constants
+        private const int gridBoxSize = 20;
+        private const int worldBoarderSize = 40;
+        private const int gridBoxBoarderSize = 1;
+
+        //Unit orientation
+        private const int DIRECTION_NORTH = 0;
+        private const int DIRECTION_SOUTH = 1;
+        private const int DIRECTION_EAST = 2;
+        private const int DIRECTION_WEST = 3;
+
+        //Graphics components used to draw.
         private Graphics graphicsObj = null, graphicsMiniMap = null;
+
+        //Images for world grid, mini map etc.
+        private Image worldMapImage, miniMapImage, unitToPlace;
+
+        //Current image position
+        private Point newMainMapPos, newMiniMapPos;
+
+        //The unit
+        private RoadUnit newUnit;
+
+        //Current speed
+        private int movementSpeed, miniMapSpeed;  
+
+        //Specified number of grids
         private int xGrid;
         private int yGrid;
-        private Image worldMapImage, miniMapImage, unitToPlace;
-        private Point newMainMapPos, newMiniMapPos;  // current image position
-        private int movementSpeed, miniMapSpeed;  // current speed
-        private float xScale,yScale;
+
+        //Mini map leftover space
         private int xMiniMapGap, yMiniMapGap;
+        
+        //Image size rescale factor
+        private float xScale,yScale;
         private float mxScale;
+
+        //Boolean to check if unit selected      
         private bool hasSelectedTile = false;
+
+        //The unit selected
         private PictureBox selected;
+
+        //Cursor offset to centre
         private Point cursorOffset;
+
+        //Current mouse position
         private Point mousePosition;
 
-        public DesignGuiForm(Point grid, String name)
+        //Unit properties
+        private int xSize;
+        private int ySize;
+        private int unitOrientation;
+        private Point lastSnappedToGrid;
+        private Point snappedToGrid;
+
+        //The Design controller
+        private Design design;
+
+        public DesignGuiForm(Point grid, String name, Design designController)
         {
-            mousePosition = new Point();
+            //Assign user specified parameters to design
             this.Name = name;
             this.xGrid = grid.X;
             this.yGrid = grid.Y;
-            worldMapImage = CreateWorldImage();
+            this.design = designController;
+            System.Console.WriteLine("Created Design with specified parameters [" + Name + ": " + xGrid + "," + yGrid + "]");
 
-            
-            // start at 0,0
+            //Initialize all points to zero
+            mousePosition = Point.Empty;
             newMainMapPos = Point.Empty;
             newMiniMapPos = Point.Empty;
-            // speed to move grid: 20 pixles / key press
+            System.Console.WriteLine("Points initialized");
+
+            //Create the world grid image
+            worldMapImage = CreateWorldImage();
+            
+            //Speed to move grid: 20 pixles / key press
             movementSpeed = 20;
             
-            System.Console.WriteLine("Created DesignGuiForm!!");
+            //Unit properties
+            unitOrientation = DIRECTION_NORTH;
+            
             InitializeComponent();
-            this.SetStyle(ControlStyles.ResizeRedraw, true);
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            this.SetStyle(ControlStyles.UserPaint, true);
+            System.Console.WriteLine("Initialized Form Components");
+
+            //Create mini-map image based on resized world area
             miniMapImage = resizeImage(CreateMiniMapImage(), this.miniMapPanel.Size);
-            graphicsObj = this.worldMap.CreateGraphics();
-            graphicsMiniMap = this.miniMapPanel.CreateGraphics();
+
+            if (miniMapImage == null)
+            {
+                System.Console.WriteLine("--->[Error creating mini image!!]<---");
+            }
+
+            //Manually set controls for form
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.DoubleBuffer, true);
+            
+            //Setting mini-map revised movement speed
             miniMapSpeed = (int)(movementSpeed * mxScale);
-            //Text = "Speed: = " + movementSpeed;
+
+            //Test statements
             System.Console.WriteLine("Speed: = " + movementSpeed + " | Mini-map speed: " + miniMapSpeed + " (" + mxScale + ")");
             System.Console.WriteLine("MiniMap scale: " + xScale + "," + yScale + "| Panel dimensions: " + worldMap.Width + "," + worldMap.Height);
             System.Console.WriteLine("Panel1 width: " + this.mapSplitContainer.Panel1.Bounds.Right);
@@ -61,26 +125,9 @@ namespace Traffic_Simulator
             System.Console.WriteLine("Panel2 Y: " + this.mapSplitContainer.Panel2.Bounds.Y);
             System.Console.WriteLine("[Actual] Panel2 Y: " + this.Bounds.Top);
             System.Console.WriteLine("splitpane gap: " + this.mapSplitContainer.SplitterDistance);
-            //System.Console.WriteLine("Y Bounds: " + this.worldMap.Bounds.Right);
             
             //Offset for cursor in world panel.
-            cursorOffset = new Point(gridBoxSize / 2, (gridBoxSize * 2) + ((gridBoxSize * 2) / 3));
-        }
-        private void DesignGuiForm_Paint(object sender, PaintEventArgs e)
-        {
-            //Console.Write("WorldMap Painted!!\n");
-            Invalidate();
-            if (unitToPlace != null)
-            {
-                graphicsObj.DrawImage(unitToPlace, mousePosition.X/* - (this.mapSplitContainer.Panel2.Bounds.X + cursorOffset.X)*/, mousePosition.Y /*- (this.Bounds.Top + cursorOffset.Y)*/);
-            }
-            graphicsMiniMap.DrawImage(this.miniMapImage, xMiniMapGap, yMiniMapGap, miniMapImage.Width, miniMapImage.Height);
-            Pen myPen = new Pen(Color.Black, 1);
-            Rectangle newRect = new Rectangle(xMiniMapGap + newMiniMapPos.X, yMiniMapGap + newMiniMapPos.Y, (int)(worldMap.Width * mxScale), (int)(worldMap.Height * mxScale));
-            //Console.WriteLine("Rect bounds: " + (xMiniMapGap + (int)((_pos.X + gridBoxSize) * mxScale)) + "," + (yMiniMapGap + (int)((_pos.Y + gridBoxSize) * mxScale)) + "," + (int)(worldMap.Width * mxScale) + "," + (int)(worldMap.Height * mxScale));
-            graphicsMiniMap.DrawRectangle(myPen,newRect);
-            graphicsObj.DrawImage(worldMapImage, newMainMapPos.X, newMainMapPos.Y, worldMapImage.Width, worldMapImage.Height);
-            //Show();
+            //cursorOffset = new Point(gridBoxSize / 2, (gridBoxSize * 2) + ((gridBoxSize * 2) / 3));
         }
         private void worldMap_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
@@ -163,27 +210,29 @@ namespace Traffic_Simulator
  
         private Image CreateWorldImage()
         {
-            Image canvas = new Bitmap(xGrid * gridBoxSize, yGrid * gridBoxSize);
-            Console.WriteLine("World size: " + xGrid * gridBoxSize + "," + yGrid * gridBoxSize);
+            Image canvas = new Bitmap(xGrid * gridBoxSize + (2 * worldBoarderSize), yGrid * gridBoxSize + (2 * worldBoarderSize));
+            Console.WriteLine("World size: " + (xGrid * gridBoxSize + (2 * worldBoarderSize)) + "," + (yGrid * gridBoxSize + (2 * worldBoarderSize)));
             
-            // create an object that will do the drawing operations
             Graphics graphicsObj = Graphics.FromImage(canvas);
 
-            // draw a few shapes on the canvas picture
+            SolidBrush RedBrush = new SolidBrush(Color.Red);
+            graphicsObj.FillRectangle(RedBrush, new Rectangle(0, 0, xGrid * gridBoxSize + (2 * worldBoarderSize), yGrid * gridBoxSize + (2 * worldBoarderSize)));
             SolidBrush myBrush = new SolidBrush(Color.Green);
-
-            graphicsObj.FillRectangle(myBrush,new Rectangle(0,0,xGrid * gridBoxSize,yGrid * gridBoxSize));
+            graphicsObj.FillRectangle(myBrush, new Rectangle(worldBoarderSize, worldBoarderSize, xGrid * gridBoxSize, yGrid * gridBoxSize));
             Pen myPen = new Pen(Color.White, 1);
-            for (int yPos = 0; yPos < canvas.Height; yPos = yPos + gridBoxSize)
+            for (int yPos = 0; yPos < yGrid; yPos++)
             {
                 //Horizontal line
-                graphicsObj.DrawLine(myPen, 0, yPos, canvas.Width, yPos);
-                //Verticle line
-                //graphicsObj.DrawLine(myPen, xPos, 0, xPos, canvas.Height);
+                graphicsObj.DrawLine(myPen, worldBoarderSize, (yPos * gridBoxSize) + worldBoarderSize, xGrid * gridBoxSize + worldBoarderSize, (yPos * gridBoxSize) + worldBoarderSize);
+                graphicsObj.DrawLine(myPen, worldBoarderSize, ((yPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize, xGrid * gridBoxSize + worldBoarderSize, ((yPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize);
             }
-            for (int xPos = 0; xPos < canvas.Width; xPos = xPos + gridBoxSize)
+            for (int xPos = 0; xPos < xGrid; xPos++)
             {
-                graphicsObj.DrawLine(myPen, xPos, 0, xPos, canvas.Height);
+                Console.WriteLine("xPos: " + xPos + " | First - start @: " + ((xPos * gridBoxSize) + worldBoarderSize)
+                    + "," + worldBoarderSize + " End @: " + ((xPos * gridBoxSize) + worldBoarderSize) + "," + (yGrid * gridBoxSize + worldBoarderSize) + "] :::: Second - start @: "
+                    + (((xPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize) + "," + worldBoarderSize + " End @: " + (((xPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize) + "," + (yGrid * gridBoxSize + worldBoarderSize));
+                graphicsObj.DrawLine(myPen, (xPos * gridBoxSize) + worldBoarderSize, worldBoarderSize, (xPos * gridBoxSize) + worldBoarderSize, yGrid * gridBoxSize + worldBoarderSize);
+                graphicsObj.DrawLine(myPen, ((xPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize, worldBoarderSize, ((xPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize, yGrid * gridBoxSize + worldBoarderSize);
             }
             // now the drawing is done, we can discard the artist object
             graphicsObj.Dispose();
@@ -231,8 +280,6 @@ namespace Traffic_Simulator
             Graphics g = Graphics.FromImage((Image)b);
            
             //g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-            g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
             g.Dispose();                                          
 
             return (Image)b;
@@ -240,15 +287,17 @@ namespace Traffic_Simulator
         private Image CreateMiniMapImage()
         {
             // Create a new Bitmap object
-            Image canvas = new Bitmap(xGrid * gridBoxSize, yGrid * gridBoxSize);
+            Bitmap bitmap = new Bitmap(xGrid * gridBoxSize, yGrid * gridBoxSize);
             Console.WriteLine("MiniMap size: " + xGrid * gridBoxSize + "," + yGrid * gridBoxSize);
-            Graphics graphicsObj = Graphics.FromImage(canvas);
+            Graphics graphicsObj = Graphics.FromImage(bitmap);
             SolidBrush myBrush = new SolidBrush(Color.Green);
-            graphicsObj.FillRectangle(myBrush, new Rectangle(0, 0, xGrid * gridBoxSize, yGrid * gridBoxSize));
+            Rectangle fillRect = new Rectangle(0, 0, xGrid * gridBoxSize, yGrid * gridBoxSize);
+            graphicsObj.FillRectangle(myBrush, fillRect);
+            //graphicsObj.FillRectangle(myBrush, new Rectangle(0, 0, xGrid * gridBoxSize, yGrid * gridBoxSize));
             //discard the artist object
             graphicsObj.Dispose();
             //return the picture
-            return canvas;
+            return (Image)bitmap;
         }
         private void offRampClicked(object sender, EventArgs e)
         {
@@ -256,6 +305,7 @@ namespace Traffic_Simulator
             {
                 offRampIcon.BackColor = Color.Transparent;
                 selected = null;
+                newUnit = null;
             }
             else
             {
@@ -274,6 +324,7 @@ namespace Traffic_Simulator
             {
                 onRampIcon.BackColor = Color.Transparent;
                 selected = null;
+                newUnit = null;
             }
             else
             {
@@ -292,6 +343,7 @@ namespace Traffic_Simulator
             {
                 singleRoadIcon.BackColor = Color.Transparent;
                 selected = null;
+                newUnit = null;
             }
             else
             {
@@ -312,6 +364,7 @@ namespace Traffic_Simulator
             {
                 twoLaneMwayIcon.BackColor = Color.Transparent;
                 selected = null;
+                newUnit = null;
             }
             else
             {
@@ -331,6 +384,7 @@ namespace Traffic_Simulator
                 threeLaneMwayIcon.BackColor = Color.Transparent;
                 unitToPlace = null;
                 selected = null;
+                newUnit = null;
             }
             else
             {
@@ -346,8 +400,18 @@ namespace Traffic_Simulator
                 {
                     Console.WriteLine(name);
                 }
-                unitToPlace = new Bitmap(System.Reflection.Assembly.GetEntryAssembly().GetManifestResourceStream("Traffic_Simulator.Resources.3_lane_Hway.png"));
+                newUnit = new RoadUnit();
+                newUnit.unitImage = new Bitmap(System.Reflection.Assembly.GetEntryAssembly().GetManifestResourceStream("Traffic_Simulator.Resources.3_lane_Hway.png"));
+                newUnit.NumOfLanes = 3;
+                newUnit.Width = 3 * gridBoxSize;
+                newUnit.Height = 1 * gridBoxSize;
                 
+                if (this.unitOrientation == DIRECTION_NORTH)
+                {
+                    xSize = newUnit.Width;
+                    ySize = newUnit.Height;
+                }
+                this.cursorOffset = new Point(xSize / 2, ySize / 2);
             }
             Refresh();
         }
@@ -369,7 +433,105 @@ namespace Traffic_Simulator
 
         private void recalculateMousePoint(object sender, MouseEventArgs e)
         {
-            mousePosition = new Point(e.X,e.Y);
+
+            snappedToGrid = snapToGrid(snapWithinWorldBounds());
+            
+            if ((int)e.X != mousePosition.X || (int)e.Y != mousePosition.Y)
+            {
+                mousePosition.X = e.X;
+                mousePosition.Y = e.Y;
+            }
+            if (newUnit != null)
+            {
+                if (snappedToGrid.X != lastSnappedToGrid.X || snappedToGrid.Y != lastSnappedToGrid.Y)
+                {
+                    lastSnappedToGrid = snappedToGrid;
+                    newUnit.unitPosition = snappedToGrid;
+                    Refresh();
+                }
+            }
+        }
+        private void miniOnPaint(object sender, PaintEventArgs e)
+        {
+            Graphics graphicsMiniMap = e.Graphics;
+            graphicsMiniMap.DrawImage(miniMapImage, xMiniMapGap, yMiniMapGap, miniMapImage.Width, miniMapImage.Height);
+            //SolidBrush myBrush = new SolidBrush(Color.Green);
+            //Rectangle fillRect = new Rectangle(xMiniMapGap, yMiniMapGap, miniMapImage.Width, miniMapImage.Height);
+            //graphicsMiniMap.FillRectangle(myBrush, fillRect);
+            Pen myPen = new Pen(Color.Black, 1);
+            Rectangle newRect = new Rectangle(xMiniMapGap + newMiniMapPos.X, yMiniMapGap + newMiniMapPos.Y, (int)(worldMap.Width * mxScale), (int)(worldMap.Height * mxScale));
+            graphicsMiniMap.DrawRectangle(myPen, newRect);
+            graphicsMiniMap.Dispose();  
+        }
+
+        /**
+         * The snapWithinWorldBounds Method keeps unit within grid. This method snaps the
+         * unit image centred behind the mouse cursor within the world
+         * bounds (within the green and white grid). If the cursor moves
+         * outside this bounds (into the red area and beyond) the unit image
+         * is repositioned within the grid.
+         */
+
+        private Point snapWithinWorldBounds()
+        {
+            int actualXposLeft = (mousePosition.X - cursorOffset.X);
+            int actualXposRight = (mousePosition.X + cursorOffset.X);
+
+            int actualYposUp = (mousePosition.Y - cursorOffset.Y);
+            int actualYposDown = (mousePosition.Y + cursorOffset.Y);
+
+            int actualXpos = (mousePosition.X - cursorOffset.X);
+            int actualYpos = (mousePosition.Y - cursorOffset.Y);
+
+            if (actualXposLeft < worldBoarderSize + newMainMapPos.X || actualXposRight > (worldMapImage.Width - worldBoarderSize) + newMainMapPos.X)
+            {
+                if (actualXposLeft < worldBoarderSize + newMainMapPos.X)
+                {
+                    actualXpos = worldBoarderSize + newMainMapPos.X;
+                }
+                if (actualXposRight > (worldBoarderSize + newMainMapPos.X + (xGrid * gridBoxSize)))
+                {
+                    actualXpos = ((worldMapImage.Width - worldBoarderSize) + newMainMapPos.X) - xSize;
+                }
+            }
+            if (actualYposUp > worldBoarderSize + newMainMapPos.Y || actualYposDown < (worldMapImage.Height - worldBoarderSize) + newMainMapPos.Y)
+            {
+                if (actualYposUp < worldBoarderSize + newMainMapPos.Y)
+                {
+                    actualYpos = worldBoarderSize + newMainMapPos.Y;
+                }
+                if (actualYposDown > (worldBoarderSize + newMainMapPos.Y + (yGrid * gridBoxSize)))
+                {
+                    actualYpos = ((worldMapImage.Height - worldBoarderSize) + newMainMapPos.Y) - ySize;
+                }
+            }
+            return new Point(actualXpos, actualYpos);
+        }
+        private Point snapToGrid(Point snappedWithinPoint)
+        {
+            int xGridNum = snappedWithinPoint.X / gridBoxSize;
+            int yGridNum = snappedWithinPoint.Y / gridBoxSize;
+            int xPos = gridBoxSize * xGridNum;
+            int yPos = gridBoxSize * yGridNum;
+            return new Point(xPos, yPos);
+        }
+        private void mainWindowPaint(object sender, PaintEventArgs e)
+        {
+            Graphics graphicsObj = this.worldMap.CreateGraphics();
+            graphicsObj.DrawImage(worldMapImage, newMainMapPos.X, newMainMapPos.Y, worldMapImage.Width, worldMapImage.Height);
+            if (newUnit != null)
+            {
+                graphicsObj.DrawImage(newUnit.unitImage, newUnit.unitPosition.X, newUnit.unitPosition.Y);
+            }
+            graphicsObj.Dispose();  
+        }
+
+        private void addUnitToGrid(object sender, MouseEventArgs e)
+        {
+            if (newUnit != null)
+            {
+                design.addRoadUnit(newUnit);
+            }
         }
     }
 }
