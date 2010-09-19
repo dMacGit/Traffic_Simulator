@@ -7,30 +7,52 @@ using System.Windows.Forms;
 
 namespace Traffic_Simulator
 {
-    //Design Controller
+    /// <summary> 
+    /// Traffic Simulator, Design Controller. This Class is used as a controller
+    /// to manage adding and removing design units to and from the design grid.
+    /// When it is first called it creates a newDesign form, that it uses to ask the
+    /// user to specify the design parameters (Name & Grid size). Once specified,
+    /// it then creates a new design Form, given the specified user parameters.
+    /// </summary>
 
     public class Design
     {
-        private RoadUnit[] roadUnits;
-        private RoadSign[] roadSigns;
-        private TrafficLight[] trafficLights;
-        private int designID;
+        /// <summary>
+        /// DesignName variable
+        /// </summary>
         private String designName;
-        private Design design;
+        /// <summary>
+        /// Parent MainGuiForm
+        /// </summary>
         private MainGuiForm parent;
-        private int mapWidthBounds;
+        /// <summary>
+        /// WorldBounds Point
+        /// </summary>
         private Point worldBounds;
-        private Point defaultWorld = new Point(128, 64);
+        /// <summary>
+        /// NewDesignForm DesignGuiForm
+        /// </summary>
         private DesignGuiForm newDesignForm;
+        /// <summary>
+        /// CreateNewDesign newDesign
+        /// </summary>
         private newDesign createNewDesign;
+        /// <summary>
+        /// DesignUnitArray array
+        /// </summary>
         private RoadUnit[,] designUnitArray;
+        /// <summary>
+        /// RoadUnitStartingId integer
+        /// </summary>
         private int roadUnitStartingId = 0;
 
-        /**
-         * 
-         * Design Constructer. Initalize the designGuiForm into the mainGuiForm
-         * 
-         */
+        /// <summary> 
+        /// Design Constructer. Initalize the designGuiForm.
+        /// Is passed the parent form [mainGuiForm] as a 
+        /// parameter so among other things the name of the
+        /// form can be changed to match the design name.
+        /// </summary> 
+        /// <param name="parent">MainGuiForm</param>
 
         public Design(MainGuiForm parent)
         {
@@ -39,9 +61,16 @@ namespace Traffic_Simulator
             createNewDesign = new newDesign(this);
             createNewDesign.Show();
         }
+         /// <summary> 
+         /// DesignParameterSet method.
+         /// Is used when the newDesign form has finished
+         /// validating its inputted parameters, in order
+         /// to pass the design parameters entered back
+         /// to the design.
+         /// </summary> 
+
         public void designParameterSet()
         {
-            //The box to set design parameters.
             this.worldBounds = createNewDesign.worldBounds;
             this.designName = createNewDesign.designName;
             System.Console.WriteLine("Design name: " + designName);
@@ -57,10 +86,17 @@ namespace Traffic_Simulator
             newDesignForm.WindowState = FormWindowState.Maximized;
             newDesignForm.Show();
             newDesignForm.Refresh();
-
-            //Setup arrays of units
             designUnitArray = new RoadUnit[worldBounds.Y, worldBounds.X];
         }
+
+        /// <summary> 
+        /// AddRoadUnit method. Is used by the design Form, when the user wishes
+        /// to add/place another unit onto the design form's grid area. This method
+        /// checks if there is any other unitwhich already occupies that tile, as well
+        /// as any other tiles within it immediate footprint.
+        /// </summary>
+        /// <param name="roadUnit">RoadUnit</param>
+        /// 
         public bool addRoadUnit(RoadUnit roadUnit)
         {
             if (designUnitArray[roadUnit.gridValue.Y, roadUnit.gridValue.X] == null)
@@ -143,10 +179,5 @@ namespace Traffic_Simulator
         {
             return null;
         }
-        /*private void isFinished(object sender, EventArgs e)
-        {
-            createNewDesign.Dispose();
-            designParameterSet();
-        }*/
     }
 }
