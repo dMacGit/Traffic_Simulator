@@ -92,11 +92,11 @@ namespace Traffic_Simulator
         /// <summary> 
         /// AddRoadUnit method. Is used by the design Form, when the user wishes
         /// to add/place another unit onto the design form's grid area. This method
-        /// checks if there is any other unitwhich already occupies that tile, as well
+        /// checks if there is any other unit which already occupies that tile, as well
         /// as any other tiles within it immediate footprint.
         /// </summary>
         /// <param name="roadUnit">RoadUnit</param>
-        /// 
+
         public bool addRoadUnit(RoadUnit roadUnit)
         {
             if (designUnitArray[roadUnit.gridValue.Y, roadUnit.gridValue.X] == null)
@@ -147,35 +147,100 @@ namespace Traffic_Simulator
             }
             return false;
         }
+
+        /// <summary> 
+        /// ModifiedUnitArray accessor method.
+        /// Returns the current array of units on the grid.
+        /// </summary>
+
         public RoadUnit[,] modifiedUnitArray
         {
             get { return designUnitArray; }
         }
+
+        /// <summary> 
+        /// AddRoadSign method. Is used by the design Form, when the user wishes
+        /// to add/place a RoadSign unit onto the design form's grid area. This method
+        /// checks if there is any other unit which already occupies that tile, as well
+        /// as any other tiles within it immediate footprint.
+        /// </summary>
+        /// <param name="roadSign">RoadSign</param>
+
         public void addRoadSign(RoadSign roadSign)
         {
 
         }
+
+        /// <summary> 
+        /// AddTrafficLight method. Is used by the design Form, when the user wishes
+        /// to add/place a TrafficLight unit onto the design form's grid area. This method
+        /// checks if there is any other unit which already occupies that tile, as well
+        /// as any other tiles within it immediate footprint.
+        /// </summary>
+        /// <param name="trafficLight">TrafficLight</param>
+
         public void addTrafficLight(TrafficLight trafficLight)
         {
 
         }
-        public void removeTrafficLight(int lightID)
+
+        /// <summary> 
+        /// RemoveTrafficLight method. Is used by the design Form, when the user wishes
+        /// to remove a TrafficLight from the design form's grid area. It removes the unit
+        /// from all tiles under it's footprint, by specifying a starting grid position.
+        /// </summary>
+        /// <param name="xGrid">Integer</param>
+        /// <param name="yGrid">Integer</param>
+
+        public void removeTrafficLight(int xGrid, int yGrid)
         {
 
         }
-        public void removeRoadSign(int signID)
+
+        /// <summary> 
+        /// RemoveRoadSign method. Is used by the design Form, when the user wishes
+        /// to remove a RoadSign from the design form's grid area. It removes the unit
+        /// from all tiles under it's footprint, by specifying a starting grid position.
+        /// </summary>
+        /// <param name="xGrid">Integer</param>
+        /// <param name="yGrid">Integer</param>
+        
+        public void removeRoadSign(int xGrid, int yGrid)
         {
 
         }
-        public void removeRoadUnit(int roadID)
+
+        /// <summary> 
+        /// RemoveRoadUnit method. Is used by the design Form, when the user wishes
+        /// to remove a RoadUnit from the design form's grid area. It removes the unit
+        /// from all tiles under it's footprint, by specifying a starting grid position.
+        /// </summary>
+        /// <param name="xGrid">Integer</param>
+        /// <param name="yGrid">Integer</param>
+        
+        public void removeRoadUnit(int xGrid, int yGrid)
         {
 
         }
+
+        /// <summary> 
+        /// SaveDesign method. This is called when the user wishes to save the
+        /// current design.
+        /// </summary>
+        /// <param name="dsign">Design</param>
+        
         public void saveDesign(Design dsign)
         {
 
         }
-        public Design openDesign(int designID)
+
+        /// <summary> 
+        /// OpenDesign method. This is called when the user wishes to open
+        /// an existing design.
+        /// </summary>
+        /// <param name="designID">String</param>
+        
+        public Design openDesign(String designID)
         {
             return null;
         }

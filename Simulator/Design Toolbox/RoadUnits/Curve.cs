@@ -1,7 +1,19 @@
 using System;
 namespace Traffic_Simulator
 {
-	public class Curve : RoadUnit  {
+    /// <summary> 
+    /// Curve RoadUnit.
+    /// </summary>
+    
+	public class Curve : RoadUnit  
+    {
+        /// <summary> 
+        /// Curve Constructor.
+        /// </summary>
+        
+        public Curve()
+        {
+        }
 	}
 
 }

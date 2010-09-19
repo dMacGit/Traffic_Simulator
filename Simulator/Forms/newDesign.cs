@@ -10,20 +10,47 @@ using System.Text.RegularExpressions;
 
 namespace Traffic_Simulator
 {
+    /// <summary> 
+    /// NewDesign Form. This form is used to gather
+    /// user defined parameters for the design form
+    /// before it is created.
+    /// </summary>
+    
     public partial class newDesign : Form
     {
-        private bool hasFinished = false;
+        /// <summary> 
+        /// ParentDes Design. Design Controller.
+        /// </summary>
         private Design parentDes;
-        private Point bounds, small = new Point(32,32), medium = new Point(64,64), large = new Point(128,128);
+        /// <summary> 
+        /// Bounds Point. Point holding the user specified grid size.
+        /// </summary>
+        private Point bounds;
+        /// <summary> 
+        /// Small Point. Point holding preset small grid size.
+        /// </summary>
+        private Point small = new Point(32, 32);
+        /// <summary> 
+        /// Medium Point. Point holding preset medium grid size.
+        /// </summary>
+        private Point medium = new Point(64, 64);
+        /// <summary> 
+        /// Large Point. Point holding preset large grid size.
+        /// </summary>
+        private Point large = new Point(128, 128);
+        /// <summary> 
+        /// Name String. Specified design name.
+        /// </summary>
         private String name;
-        private bool customCheckPrevState = false;
 
-        public newDesign()
-        {
-            bounds = new Point(0, 0);
-            InitializeComponent();
-        }
-
+        /// <summary> 
+        /// NewDesign Constructor. Initializes the
+        /// bounds parameter and also the designer
+        /// components. Hides the custom grid options
+        /// and specified the parent design controller.
+        /// </summary>
+        /// <param name="parentDes">Design</param>
+        
         public newDesign(Design parentDes)
         {
             this.parentDes = parentDes;
@@ -31,20 +58,47 @@ namespace Traffic_Simulator
             InitializeComponent();
             this.customSizeSet.Hide();
         }
+
+        /// <summary> 
+        /// WorldBounds Mutator Method. Gets or sets
+        /// the bounds value.
+        /// </summary>
+        
         public Point worldBounds
         {
             get { return bounds; }
             set { bounds = value;}
         }
+
+        /// <summary> 
+        /// DesignName Mutator Method. Gets or sets
+        /// the designName value.
+        /// </summary>
+        
         public String designName
         {
             get { return name; }
             set { name = value; }
         }
+
+        /// <summary> 
+        /// ValidateDesignName Method. Checks the inputted
+        /// string is a valid name.
+        /// </summary>
+        /// <param name="input">String</param>
+        
         private bool validateDesignName(String input)
         {
             return Regex.IsMatch(input, @"^[a-zA-Z0-9_]+$");
         }
+
+        /// <summary> 
+        /// ValidateCustomGrid Method. Checks the inputted
+        /// custom grid values are numbers and not letters.
+        /// </summary>
+        /// <param name="xString">String</param>
+        /// <param name="yString">String</param>
+        
         private bool validateCustomGrid(String xString, String yString)
         {
             int n;
@@ -55,6 +109,15 @@ namespace Traffic_Simulator
             else
                 return false;
         }
+
+        /// <summary> 
+        /// ValidateGridBounds Method. Checks the passed point
+        /// is valid. To be valid it must be divisible by 2,
+        /// ie using % there is no remander, and also must be
+        /// greater then the minimum bound of 32.
+        /// </summary>
+        /// <param name="toValidate">Point</param>
+        
         private bool validateGridBounds(Point toValidate)
         {
             if (toValidate.X % 2 > 0 || toValidate.Y % 2 > 0)
@@ -66,8 +129,15 @@ namespace Traffic_Simulator
                 return false;
             }
             return true;
-
         }
+
+        /// <summary> 
+        /// RadioButtonsGroup_CheckedChanged Event Handler method. Handles
+        /// preset grid radio buttons pressed.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">EventArgs</param>
+        
         private void radioButtonsGroup_CheckedChanged(object sender, EventArgs e)
         {
             if (this.smallGridOption.Checked)
@@ -83,6 +153,14 @@ namespace Traffic_Simulator
                 bounds = large;
             }
         }
+
+        /// <summary> 
+        /// CheckBoxButtonCustom_CheckedChanged Event Handler method. Handles
+        /// the custom grid sizes check box being clicked.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">EventArgs</param>
+        
         private void checkBoxButtonCustom_CheckedChanged(object sender, EventArgs e)
         {
             if (this.customGridOption.Checked)
@@ -96,6 +174,14 @@ namespace Traffic_Simulator
                 this.customSizeSet.Hide();
             }
         }
+
+        /// <summary> 
+        /// IsFinished Event Handler method. Handles 
+        /// when the user clicks the accept button.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">EventArgs</param>
+        
         private void isFinished(object sender, EventArgs e)
         {
 

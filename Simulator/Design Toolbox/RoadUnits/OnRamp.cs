@@ -1,7 +1,19 @@
 using System;
 namespace Traffic_Simulator
 {
-	public class OnRamp : Ramp  {
+    /// <summary> 
+    /// OnRamp RoadUnit.
+    /// </summary>
+    
+	public class OnRamp : Ramp
+    {
+        /// <summary> 
+        /// OnRamp Constructor.
+        /// </summary>
+        
+        public OnRamp()
+        {
+        }
 	}
 
 }
