@@ -68,7 +68,7 @@ namespace Traffic_Simulator
                 if (roadUnit.NumOfLanes > 1)
                 {
                     int count = roadUnit.NumOfLanes-1;
-                    while (count > 0)
+                    while (count >= 0)
                     {
                         if (designUnitArray[roadUnit.gridValue.Y, roadUnit.gridValue.X + count] != null)
                         {
@@ -80,7 +80,8 @@ namespace Traffic_Simulator
                     }
                     roadUnit.UnitID = roadUnitStartingId;
                     roadUnitStartingId++;
-                    while (count < (roadUnit.NumOfLanes-1) )
+                    count = 0;
+                    while (count <= (roadUnit.NumOfLanes-1) )
                     {
                         designUnitArray[roadUnit.gridValue.Y, roadUnit.gridValue.X+count] = roadUnit;
                         if (count == 0)

@@ -62,7 +62,6 @@
             // 
             // worldMap
             // 
-            this.worldMap.AutoScroll = true;
             this.worldMap.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.worldMap.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.worldMap.Dock = System.Windows.Forms.DockStyle.Fill;

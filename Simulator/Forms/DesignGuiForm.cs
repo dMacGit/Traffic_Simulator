@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace Traffic_Simulator
 {
@@ -36,7 +30,7 @@ namespace Traffic_Simulator
         //Mouse Entered grid boolean
         private bool mouseEnteredView = false;
 
-        //The unit
+        //The units
         private RoadUnit newUnit;
 
         //Current speed
@@ -103,6 +97,8 @@ namespace Traffic_Simulator
             InitializeComponent();
             System.Console.WriteLine("Initialized Form Components");
 
+            graphicsMiniMap = miniMapPanel.CreateGraphics();
+
             //Create mini-map image based on resized world area
             miniMapImage = resizeImage(CreateMiniMapImage(), this.miniMapPanel.Size);
 
@@ -119,90 +115,48 @@ namespace Traffic_Simulator
             
             //Setting mini-map revised movement speed
             miniMapSpeed = (int)(movementSpeed * mxScale);
-
-            //Test statements
-            System.Console.WriteLine("Speed: = " + movementSpeed + " | Mini-map speed: " + miniMapSpeed + " (" + mxScale + ")");
-            System.Console.WriteLine("MiniMap scale: " + xScale + "," + yScale + "| Panel dimensions: " + worldMap.Width + "," + worldMap.Height);
-            System.Console.WriteLine("Panel1 width: " + this.mapSplitContainer.Panel1.Bounds.Right);
-            System.Console.WriteLine("Panel1 Y: " + this.mapSplitContainer.Panel1.Bounds.Y);
-            System.Console.WriteLine("Panel2 X: " + this.mapSplitContainer.Panel2.Bounds.X);//<--Possibly edge of main window [X]
-            System.Console.WriteLine("Panel2 Y: " + this.mapSplitContainer.Panel2.Bounds.Y);
-            System.Console.WriteLine("[Actual] Panel2 Y: " + this.Bounds.Top);
-            System.Console.WriteLine("splitpane gap: " + this.mapSplitContainer.SplitterDistance);
-            
-            //Offset for cursor in world panel.
-            //cursorOffset = new Point(gridBoxSize / 2, (gridBoxSize * 2) + ((gridBoxSize * 2) / 3));
         }
         private void worldMap_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.Left:
-                    //Console.Write("you pressed the left arrow!\n");
                     UpdatePosition(movementSpeed, 0, -miniMapSpeed, 0);
                     break;
-
                 case Keys.Right:
-                    //Console.Write("you pressed the right arrow!\n");
                     UpdatePosition(-movementSpeed, 0, miniMapSpeed, 0);
                     break;
-
                 case Keys.Up:
-                    //Console.Write("you pressed the up arrow!\n");
                     UpdatePosition(0, movementSpeed, 0, -miniMapSpeed);
                     break;
-
                 case Keys.Down:
-                    //Console.Write("you pressed the down arrow!\n");
                     UpdatePosition(0, -movementSpeed, 0, miniMapSpeed);
                     break;
-
-                /*case Keys.Add:
-                    _speed++;
-                    _speed = Math.Min(10, _speed);
-                    Text = "Speed: = " + _speed;
-                    break;
-
-                case Keys.Subtract:
-                    _speed--;
-                    _speed = Math.Max(1, _speed);
-                    Text = "Speed: = " + _speed;
-                    break;*/
                 default:
                     return;
             }
         }
-        // the move helper function
+
+
         private void UpdatePosition(int dx, int dy,int mini_dx, int mini_dy)
         {
-            //Console.Write("UpdatePosition!\n");
             Point newPos = new Point(newMainMapPos.X + dx, newMainMapPos.Y + dy);
             Point miniPos = new Point((int)(newMiniMapPos.X + mini_dx), (int)(newMiniMapPos.Y + mini_dy));
-            // dont go out of window boundary
-            //newPos.X = Math.Max(0, Math.Min(ClientSize.Width - worldMapImage.Width, newPos.X));
-            //newPos.Y = Math.Max(0, Math.Min(ClientSize.Height - worldMapImage.Height, newPos.Y));
 
             if (newPos != newMainMapPos)
-            {
-                //Console.Write("UpdatePosition:::if reached\n");
-                
+            {                
                 newMainMapPos = newPos;
-                
-                //Console.WriteLine("Picture pos: " + _pos.X + "," + _pos.Y);
                 Refresh();
             }
             if (miniPos != newMiniMapPos)
             {
                 newMiniMapPos = miniPos;
                 Refresh();
-            
             }
             else
             {
-                //Console.WriteLine("Picture pos: " + _pos.X + "," + _pos.Y);
                 Refresh();
             }
-            
         }
         
         /*
@@ -232,20 +186,14 @@ namespace Traffic_Simulator
             }
             for (int xPos = 0; xPos < xGrid; xPos++)
             {
-                /*
-                Console.WriteLine("xPos: " + xPos + " | First - start @: " + ((xPos * gridBoxSize) + worldBoarderSize)
-                    + "," + worldBoarderSize + " End @: " + ((xPos * gridBoxSize) + worldBoarderSize) + "," + (yGrid * gridBoxSize + worldBoarderSize) + "] :::: Second - start @: "
-                    + (((xPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize) + "," + worldBoarderSize + " End @: " + (((xPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize) + "," + (yGrid * gridBoxSize + worldBoarderSize));*/
+                //Vertical line
                 graphicsObj.DrawLine(myPen, (xPos * gridBoxSize) + worldBoarderSize, worldBoarderSize, (xPos * gridBoxSize) + worldBoarderSize, yGrid * gridBoxSize + worldBoarderSize);
                 graphicsObj.DrawLine(myPen, ((xPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize, worldBoarderSize, ((xPos * gridBoxSize) + (gridBoxSize - 1)) + worldBoarderSize, yGrid * gridBoxSize + worldBoarderSize);
             }
-            // now the drawing is done, we can discard the artist object
             graphicsObj.Dispose();
-
-            // return the picture
             return canvas;
         }
-        private Image resizeImage(Image imgToResize, Size size)
+        private Bitmap resizeImage(Image imgToResize, Size size)
         {
             int sourceWidth = imgToResize.Width;
             int sourceHeight = imgToResize.Height;
@@ -282,26 +230,20 @@ namespace Traffic_Simulator
             Console.WriteLine("world display window bounds: " + this.worldMap.Width + "," + this.worldMap.Height + " | Mini view box: " + this.worldMap.Width * this.mxScale + "," + this.worldMap.Height * this.mxScale);
 
             Bitmap b = new Bitmap(destWidth, destHeight);
-            Graphics g = Graphics.FromImage((Image)b);
+            //Graphics g = Graphics.FromImage((Image)b);
 
-            //g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            g.Dispose();                                          
-
-            return (Image)b;
+            //g.Dispose();                                          
+            return b;
         }
         private Image CreateMiniMapImage()
         {
-            // Create a new Bitmap object
             Bitmap bitmap = new Bitmap(xGrid * gridBoxSize, yGrid * gridBoxSize);
             Console.WriteLine("MiniMap size: " + xGrid * gridBoxSize + "," + yGrid * gridBoxSize);
             Graphics graphicsObj = Graphics.FromImage(bitmap);
             SolidBrush myBrush = new SolidBrush(Color.Green);
-            Rectangle fillRect = new Rectangle(0, 0, xGrid * gridBoxSize, yGrid * gridBoxSize);
-            graphicsObj.FillRectangle(myBrush, fillRect);
-            //graphicsObj.FillRectangle(myBrush, new Rectangle(0, 0, xGrid * gridBoxSize, yGrid * gridBoxSize));
-            //discard the artist object
-            graphicsObj.Dispose();
-            //return the picture
+            //Rectangle fillRect = new Rectangle(0, 0, xGrid * gridBoxSize, yGrid * gridBoxSize);
+            graphicsObj.FillRectangle(myBrush, new Rectangle(0, 0, xGrid * gridBoxSize, yGrid * gridBoxSize));
+            //graphicsObj.Dispose();
             return (Image)bitmap;
         }
         private void offRampClicked(object sender, EventArgs e)
@@ -479,10 +421,9 @@ namespace Traffic_Simulator
         private void miniOnPaint(object sender, PaintEventArgs e)
         {
             Graphics graphicsMiniMap = e.Graphics;
-            graphicsMiniMap.DrawImage(miniMapImage, xMiniMapGap, yMiniMapGap, miniMapImage.Width, miniMapImage.Height);
-            //SolidBrush myBrush = new SolidBrush(Color.Green);
-            //Rectangle fillRect = new Rectangle(xMiniMapGap, yMiniMapGap, miniMapImage.Width, miniMapImage.Height);
-            //graphicsMiniMap.FillRectangle(myBrush, fillRect);
+            Rectangle rect = new Rectangle(xMiniMapGap, yMiniMapGap, miniMapImage.Width, miniMapImage.Height);
+            SolidBrush newGreen = new SolidBrush(Color.Green);
+            graphicsMiniMap.FillRectangle(newGreen, rect);
             Pen myPen = new Pen(Color.Black, 1);
             Rectangle newRect = new Rectangle(xMiniMapGap + newMiniMapPos.X, yMiniMapGap + newMiniMapPos.Y, (int)(worldMap.Width * mxScale), (int)(worldMap.Height * mxScale));
             graphicsMiniMap.DrawRectangle(myPen, newRect);
