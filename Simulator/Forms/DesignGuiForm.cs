@@ -5,6 +5,13 @@ using System.Windows.Forms;
 
 namespace Traffic_Simulator
 {
+    /// <summary> 
+    /// DesignGuiForm. This is the design's form, and it
+    /// handles all the gui events, such as button presses,
+    /// mouse presses etc. It is delegated to handle all of
+    /// the gui components by the design controller.
+    /// </summary>
+    
     public partial class DesignGuiForm : Form
     {
         //Design constants
@@ -159,7 +166,7 @@ namespace Traffic_Simulator
             }
         }
         
-        /*
+        /**
          * 
          * Create World. Creates an image with a certain colour,
          * with the dimensions the user specified. This is the worldMap.
