@@ -1,7 +1,12 @@
 using System;
 namespace Traffic_Simulator
 {
-	public interface EntranceExit {
+    /// <summary> 
+    /// Road Enterance/Exit Interface.
+    /// </summary>
+    
+	public interface EntranceExit 
+    {
 
 	}
 

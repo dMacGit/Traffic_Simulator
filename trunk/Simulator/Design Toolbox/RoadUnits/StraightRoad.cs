@@ -1,13 +1,18 @@
 using System;
 namespace Traffic_Simulator
 {
+    /// <summary> 
+    /// StraightRoad RoadUnit.
+    /// </summary>
+    
 	public class StraightRoad : RoadUnit  
     {
-        private bool lal;
-
+        /// <summary> 
+        /// StraightRoad Constructor.
+        /// </summary>
+        
         public StraightRoad()
         {
-            
         }
 	}
 

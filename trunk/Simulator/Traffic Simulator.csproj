@@ -91,7 +91,6 @@
       <DependentUpon>MainGuiForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Design Toolbox\TrafficLights\LaneLight.cs" />
-    <Compile Include="Design Toolbox\TrafficLights\LightProperties.cs" />
     <Compile Include="MainGui.cs" />
     <Compile Include="Simulation ToolBox\MeasurementTool.cs" />
     <Compile Include="Design Toolbox\RoadUnits\OffRamp.cs" />
@@ -141,7 +140,6 @@
     <Compile Include="Design Toolbox\RoadUnits\Ramp.cs" />
     <Compile Include="Design Toolbox\RoadSigns\RoadSign.cs" />
     <Compile Include="Design Toolbox\RoadUnits\RoadUnit.cs" />
-    <Compile Include="SimulationGui.cs" />
     <Compile Include="Simulator.cs" />
     <Compile Include="Design Toolbox\RoadUnits\StraightRoad.cs" />
     <Compile Include="Design Toolbox\TrafficLights\TrafficLight.cs" />
@@ -207,10 +205,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Design Toolbox\RoadUnits\Multi-Lane\" />
-    <Folder Include="Design Toolbox\RoadUnits\Single-Lane\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

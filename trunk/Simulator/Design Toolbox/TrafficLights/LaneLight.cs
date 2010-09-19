@@ -1,14 +1,27 @@
 using System;
 namespace Traffic_Simulator
 {
-	public class LaneLight : TrafficLight  {
+    /// <summary> 
+    /// LaneLight Class. Represents the arrow/lights overhead
+    /// on the motorway, indicating lanes.
+    /// </summary>
+    
+	public class LaneLight : TrafficLight  
+    {
+        /// <summary> 
+        /// DispString String. Lane light value
+        /// </summary>
+        
 		private String dispString;
 
-		public void SetDispString(String dispString) {
-			throw new System.Exception("Not implemented");
-		}
-		public String GetDispString() {
-			throw new System.Exception("Not implemented");
+        /// <summary> 
+        /// DispString Mutator Method. Gets or Sets the dispString.
+        /// </summary>
+        
+		public String DispString
+        {
+            get { return dispString; }
+            set { dispString = value; }
 		}
 
 	}

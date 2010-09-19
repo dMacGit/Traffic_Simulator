@@ -6,35 +6,26 @@ using System.Drawing;
 
 namespace Traffic_Simulator
 {
+    /// <summary> 
+    /// MainGui Class. Is the class which is
+    /// run to start the application. It creates
+    /// mainGuiForm onto which the design and
+    /// simulation are added and used.
+    /// </summary>
+    
 	public class MainGui 
     {
-        private Form displayPanel;
-        private DesignGuiForm designGuiForm;
-        private static MainGuiForm mainDisplay_Static;
-
-        //private SimulationGuiForm simulationGuiForm;
-
-
         /// <summary>
-        /// The main entry point for the application.
+        /// Application Startup/Run method.
         /// </summary>
         [STAThread]
         public static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            mainDisplay_Static = new MainGuiForm();
-            Application.Run(mainDisplay_Static);
+            MainGuiForm mainDisplay = new MainGuiForm();
+            Application.Run(mainDisplay);
         }
-        public Graphics GetDisplay()
-        {
-			throw new Exception("Not implemented");
-		}
-        public void SetDisplay(Graphics panel)
-        {
-			throw new Exception("Not implemented");
-		}
-
 	}
 
 }
